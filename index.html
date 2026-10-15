@@ -1,0 +1,1530 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nor Saiful Azam</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Nor Saiful Azam bin Nor Azmi, researcher in multimodal machine learning and hateful content detection at Kitami Institute of Technology.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500&text=%E3%82%A2%E3%82%A4%E3%82%B5%E3%82%B6%E3%82%BA%E3%83%8E%E3%83%93%E3%83%95%E3%83%9F%E3%83%A0%E3%83%AB%E3%83%B3%E3%83%BC&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,500;12..96,700;12..96,800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+/* Layout: a model run over a winter night. Hero = attention over name tokens + a detection box on the photo; sections read like annotated layers. Dark-first. */
+:root {
+  --bg: #0b111c;          /* Kitami night */
+  --bg-2: #111a28;
+  --surface: #152133;
+  --ink: #e9eff6;         /* snow */
+  --muted: #93a2b6;
+  --rule: #24324a;
+  --ice: #6cc8ff;         /* attention, cold end */
+  --heat: #ffb547;        /* attention, hot end */
+  --box: #ffe14d;         /* detection box */
+  --box-ink: #1a1500;
+  --go: #4fd98a;
+  --focus: #ffe14d;       /* keyboard focus ring */
+  --heat-ink: #ffb547;    /* small orange text */
+  --box-text: #ffe14d;    /* detection-box yellow, as text */
+  /* career map popup */
+  --ink-2: #c9d4e2; --rule-2: #33455f;
+  --k-research: #ffb547; --k-models: #a78bff; --k-pubs: #6cc8ff; --k-edu: #5fe08a; --k-work: #ff7ec4; --k-life: #ff6b4a; --k-me: var(--ink);
+  --kt-research: #ffb547; --kt-models: #a78bff; --kt-pubs: #6cc8ff; --kt-edu: #5fe08a; --kt-work: #ff7ec4; --kt-life: #ff6b4a; --kt-me: var(--ink); --go-ink: #4fd98a; --q-ink: #ffe14d; --hs-stroke: var(--box);
+  --q: #ffe14d; --hl: rgba(108, 200, 255, .1); --grid-line: rgba(233, 239, 246, .035); --grid-major: rgba(233, 239, 246, .075);
+  --display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+  --body: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  --s-1: 0.8rem; --s0: 1.05rem; --s1: 1.3rem; --s2: clamp(1.9rem, 4.2vw, 2.9rem); --s5: clamp(3rem, 10.5vw, 7.6rem);
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #eef2f7; --bg-2: #e3e9f1; --surface: #ffffff; --ink: #0f1826; --muted: #536176;
+    --rule: #cdd6e2; --ice: #1679c4; --heat: #d97a00; --box: #f5c400; --box-ink: #1a1500; --go: #1f9a55;
+    --focus: #0f1826; --heat-ink: #9a5200; --box-text: #7a5d00;
+    --ink-2: #2b384b; --rule-2: #b5c1d1;
+    --k-research: #da7306; --k-models: #6636d1; --k-pubs: #237fc8; --k-edu: #189a69; --k-work: #c33fa6; --k-life: #c2181d;
+    --kt-research: #a85500; --kt-models: #6636d1; --kt-pubs: #1c6fb0; --kt-edu: #117a55; --kt-work: #a8338e; --kt-life: #c2181d; --kt-me: var(--ink); --go-ink: #17804a; --q-ink: #7a5d00; --hs-stroke: var(--box-text);
+    --q: #9c7a00; --hl: rgba(22, 121, 196, .08); --grid-line: rgba(15, 24, 38, .04); --grid-major: rgba(15, 24, 38, .08);
+    color-scheme: light;
+  }
+}
+:root[data-theme="light"] {
+  --bg: #eef2f7; --bg-2: #e3e9f1; --surface: #ffffff; --ink: #0f1826; --muted: #536176;
+  --rule: #cdd6e2; --ice: #1679c4; --heat: #d97a00; --box: #f5c400; --box-ink: #1a1500; --go: #1f9a55;
+  --focus: #0f1826; --heat-ink: #9a5200; --box-text: #7a5d00;
+  --ink-2: #2b384b; --rule-2: #b5c1d1;
+  --k-research: #da7306; --k-models: #6636d1; --k-pubs: #237fc8; --k-edu: #189a69; --k-work: #c33fa6; --k-life: #c2181d;
+    --kt-research: #a85500; --kt-models: #6636d1; --kt-pubs: #1c6fb0; --kt-edu: #117a55; --kt-work: #a8338e; --kt-life: #c2181d; --kt-me: var(--ink); --go-ink: #17804a; --q-ink: #7a5d00; --hs-stroke: var(--box-text);
+  --q: #9c7a00; --hl: rgba(22, 121, 196, .08); --grid-line: rgba(15, 24, 38, .04); --grid-major: rgba(15, 24, 38, .08);
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: var(--s0); line-height: 1.6; overflow-x: hidden; }
+a { color: var(--ice); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; border-radius: 3px; }
+.gut { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.wrap { max-width: 1120px; margin: 0 auto; }
+
+/* ---------- top bar ---------- */
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--rule); }
+.bar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; padding-block: 12px; font-family: var(--mono); font-size: var(--s-1); }
+.logo { font-weight: 700; color: var(--ink); text-decoration: none; letter-spacing: 0.02em; }
+.logo span { color: var(--heat); }
+.bar nav { display: flex; flex-wrap: wrap; gap: 4px 18px; align-items: center; }
+.bar nav a { color: var(--muted); text-decoration: none; }
+.bar nav a:hover { color: var(--ink); }
+.bar nav a.pill { color: var(--box-ink); background: var(--box); padding: 3px 12px; border-radius: 999px; font-weight: 700; }
+.bar nav a.pill:hover { color: var(--box-ink); filter: brightness(1.06); }
+
+/* ---------- hero ---------- */
+.hero { position: relative; overflow: hidden; border-bottom: 1px solid var(--rule); background: radial-gradient(120% 90% at 85% 0%, var(--bg-2), var(--bg) 60%); }
+#field { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.hero .wrap { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 270px; grid-template-rows: auto auto; column-gap: 56px; row-gap: 30px; align-items: start; padding-block: 56px 72px; }
+.namebar { grid-column: 1; grid-row: 1; min-width: 0; align-self: end; }
+.intro { grid-column: 1; grid-row: 2; }
+.det { grid-column: 2; grid-row: 1 / span 2; align-self: center; }
+.hero .wrap > div { min-width: 0; }
+.eyebrow { display: flex; flex-wrap: wrap; gap: 6px 14px; font-family: var(--mono); font-size: var(--s-1); color: var(--muted); margin: 0 0 22px; }
+.eyebrow b { color: var(--ink); font-weight: 500; }
+.eyebrow .live { display: inline-flex; align-items: center; gap: 7px; color: var(--go); }
+.eyebrow .live::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; animation: ping 2.2s infinite; }
+
+h1.tokens { margin: 0; padding-bottom: 0; white-space: nowrap; font-family: var(--display); font-weight: 800; font-size: min(4.2rem, 4.2vw); line-height: 1; letter-spacing: -0.045em; overflow: visible; }
+h1.tokens .line { display: inline-block; }
+.tok { position: relative; display: inline-block; }
+.tok .meta { position: absolute; left: 0; right: 0; top: calc(100% + 8px); display: grid; gap: 5px; font-family: var(--mono); font-size: clamp(0.55rem, 0.85vw, 0.72rem); font-weight: 500; letter-spacing: 0.04em; line-height: 1.2; color: var(--muted); }
+.tok .att { position: relative; height: 5px; border-radius: 3px; background: var(--rule); overflow: hidden; }
+.tok .att::after { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: var(--a); border-radius: inherit; background: linear-gradient(90deg, var(--ice), var(--heat)); transform-origin: left; animation: attend 4.8s ease-in-out infinite; animation-delay: var(--d, 0s); }
+.tok .tags { display: flex; justify-content: space-between; gap: 6px; }
+.tok .val { font-variant-numeric: tabular-nums; }
+/* tokenizer sweep on the name (Save Point 2): a bar runs under each token on load, and stays under a token while it is hovered */
+.tok::after { content: ""; position: absolute; left: 0; right: 0; bottom: -0.08em; height: 0.07em; min-height: 3px; border-radius: 99px; background: linear-gradient(90deg, var(--ice), var(--heat)); transform: scaleX(0); transform-origin: left; animation: tokscan 1.6s cubic-bezier(.2,.8,.2,1) both; animation-delay: var(--d); pointer-events: none; }
+.tok:hover::after { animation: none; transform: scaleX(1); opacity: 1; transition: transform .25s cubic-bezier(.2,.8,.2,1); }
+@keyframes tokscan { 0% { transform: scaleX(0); opacity: 1; } 45% { transform: scaleX(1); opacity: 1; } 100% { transform: scaleX(1); opacity: 0; } }
+.jp { display: flex; align-items: center; gap: 14px; margin: 18px 0 0; font-family: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif; font-weight: 500; font-size: clamp(0.95rem, 2.3vw, 1.7rem); letter-spacing: 0.14em; color: var(--muted); white-space: nowrap; }
+.jp .lang { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em; color: var(--heat-ink); border: 1px solid currentColor; border-radius: 3px; padding: 1px 6px; }
+.intro { min-width: 0; }
+.lede { margin: 0; max-width: 33em; font-size: clamp(1.15rem, 2vw, 1.4rem); line-height: 1.5; }
+.hl { white-space: nowrap; margin-inline: -4px; background: linear-gradient(90deg, color-mix(in srgb, var(--heat) 38%, transparent), color-mix(in srgb, var(--ice) 30%, transparent)); padding: 0 4px; border-radius: 3px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+.btn { display: inline-flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 0.86rem; font-weight: 500; text-decoration: none; padding: 11px 20px; border-radius: 999px; border: 1px solid var(--rule); color: var(--ink); background: var(--surface); transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease; }
+.btn:hover { transform: translateY(-2px); border-color: var(--ice); }
+.btn.hot { background: linear-gradient(100deg, var(--heat), var(--box)); color: var(--box-ink); border-color: transparent; font-weight: 700; box-shadow: 0 8px 28px -10px var(--heat); }
+.btn.hot:hover { box-shadow: 0 12px 32px -8px var(--heat); }
+.btn .arr { transition: transform .18s ease; }
+.btn:hover .arr { transform: translateX(4px); }
+
+/* detection box photo */
+.det { position: relative; margin: 0; }
+.det .frame { position: relative; }
+.det img { display: block; width: 100%; max-width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 6px; }
+.det .grid { position: absolute; inset: 0; border-radius: 6px; background-image: linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px); background-size: 25% 20%; opacity: .14; pointer-events: none; }
+.det .bbox { position: absolute; left: 13%; top: 7%; width: 74%; height: 62%; border: 2px solid var(--box); border-radius: 2px; box-shadow: 0 0 0 1px rgba(0,0,0,.25); animation: lock 1.1s cubic-bezier(.2,.8,.2,1) both .3s; }
+.det .bbox span { position: absolute; left: -2px; top: -25px; background: var(--box); color: var(--box-ink); font-family: var(--mono); font-size: 0.72rem; font-weight: 700; padding: 3px 8px; white-space: nowrap; border-radius: 2px 2px 0 0; }
+.det figcaption { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2px 8px; margin-top: 10px; font-family: var(--mono); font-size: 0.72rem; color: var(--muted); }
+.det figcaption b { color: var(--go); font-weight: 500; }
+.det figcaption span { white-space: nowrap; }
+
+/* ticker */
+.ticker { border-bottom: 1px solid var(--rule); overflow: hidden; background: var(--bg-2); }
+.ticker .track { display: flex; width: max-content; animation: scroll 38s linear infinite; }
+.ticker ul { display: flex; margin: 0; padding: 14px 0; list-style: none; font-family: var(--mono); font-size: 0.86rem; color: var(--muted); white-space: nowrap; }
+.ticker li { padding: 0 22px; }
+.ticker li::after { content: "◆"; margin-left: 44px; color: var(--heat); font-size: 0.6em; vertical-align: 2px; }
+.ticker li:nth-child(3n+1) { color: var(--ink); }
+
+/* ---------- sections ---------- */
+section.layer { padding-block: 88px; border-bottom: 1px solid var(--rule); }
+[id^="pub-"], [id^="job-"], [id^="edu-"], #fig-arch { scroll-margin-top: 76px; }
+.head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 18px; margin-bottom: 40px; }
+.head .idx { font-family: var(--mono); font-size: var(--s-1); color: var(--heat-ink); letter-spacing: 0.06em; }
+.head h2 { margin: 0; font-family: var(--display); font-weight: 800; font-size: var(--s2); letter-spacing: -0.035em; line-height: 1; }
+.head .pos { font-family: var(--mono); font-size: var(--s-1); color: var(--muted); border: 1px solid var(--rule); padding: 2px 8px; border-radius: 3px; }
+
+/* about */
+.about { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 56px; align-items: start; }
+.about p { margin: 0 0 1em; max-width: 36em; }
+.about .big { font-family: var(--display); font-weight: 500; font-size: clamp(1.4rem, 2.6vw, 1.9rem); line-height: 1.3; letter-spacing: -0.02em; }
+.facts { margin: 0; border-top: 1px solid var(--rule); }
+.facts div { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--rule); }
+.facts dt { font-family: var(--mono); font-size: var(--s-1); color: var(--muted); padding-top: 3px; }
+.facts dd { margin: 0; }
+
+/* career map button (layer_01) */
+.about > div, .about > .side { min-width: 0; }
+.side { display: grid; gap: 22px; align-content: start; }
+.mapbtn { position: relative; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 16px; padding: 14px 18px 14px 14px; border-radius: 14px; text-decoration: none; color: var(--ink); background: linear-gradient(120deg, color-mix(in srgb, var(--ice) 16%, var(--surface)), var(--surface) 60%, color-mix(in srgb, var(--heat) 14%, var(--surface))); border: 1px solid var(--rule); overflow: hidden; isolation: isolate; transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease; }
+.mapbtn:hover { border-color: var(--ice); box-shadow: 0 14px 34px -18px var(--ice); }
+.mapbtn .mini { width: 112px; height: auto; flex: none; border-radius: 9px; background: var(--bg); border: 1px solid var(--rule); }
+.mapbtn .mini .e path { fill: none; stroke: var(--muted); stroke-width: 1; opacity: .45; }
+.mapbtn .mini .p { fill: var(--ice); transform-box: fill-box; transform-origin: center; animation: drift 5s ease-in-out infinite; }
+.mapbtn .mini .p2, .mapbtn .mini .p5 { fill: var(--heat); animation-delay: -1.6s; }
+.mapbtn .mini .p3 { fill: var(--box); animation-delay: -3.1s; }
+.mapbtn .mini .p6 { fill: var(--go); animation-delay: -2.2s; }
+.mapbtn .mini .me { fill: var(--ink); }
+.mapbtn .mini .ring { fill: none; stroke: var(--heat); stroke-width: 1.5; transform-box: fill-box; transform-origin: center; animation: ring 2.6s ease-out infinite; }
+.mapbtn .t { display: grid; gap: 3px; min-width: 0; }
+.mapbtn .k { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em; color: var(--heat-ink); }
+.mapbtn:focus-visible { border-radius: 14px; }
+button.mapbtn { width: 100%; font: inherit; text-align: left; cursor: pointer; }
+.mapbtn b { font-family: var(--display); font-weight: 800; font-size: 1.28rem; line-height: 1.1; letter-spacing: -0.02em; text-wrap: balance; }
+.mapbtn small { font-size: 0.9rem; line-height: 1.4; color: var(--muted); text-wrap: pretty; }
+/* in the narrow side column of a two-column About (821-1099px) the card stacks, as it does on phones */
+@media (min-width: 821px) and (max-width: 1099px) {
+  .mapbtn { grid-template-columns: minmax(0, 1fr) auto; }
+  .mapbtn .mini { grid-column: 1 / -1; width: 100%; max-height: 110px; }
+}
+.mapbtn .go { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: var(--box); color: var(--box-ink); font-family: var(--mono); font-weight: 700; transition: transform .2s ease; }
+.mapbtn:hover .go { transform: translateX(3px); }
+
+/* research: architecture figure + themes */
+.arch { margin: 0 0 48px; }
+.arch-scroll { overflow-x: auto; border: 1px solid var(--rule); border-radius: 12px; background: var(--bg-2); padding: 22px 18px; -webkit-overflow-scrolling: touch; }
+.arch svg { display: block; width: 100%; height: auto; }
+.arch figcaption { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 24px; margin-top: 14px; font-family: var(--mono); font-size: var(--s-1); color: var(--muted); }
+.arch .hint { display: none; margin: 8px 2px 0; font-family: var(--mono); font-size: var(--s-1); color: var(--heat-ink); text-align: right; }
+.hs { fill: transparent; stroke: transparent; stroke-width: 2; stroke-dasharray: 7 5; cursor: pointer; transition: stroke .15s ease, fill .15s ease; }
+.hs:hover, .hs.on { stroke: var(--hs-stroke); fill: color-mix(in srgb, var(--box) 7%, transparent); }
+.hs:focus { outline: none; }
+.hs:focus-visible { stroke: var(--focus); stroke-width: 3; stroke-dasharray: none; }
+.arch-info { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 16px; align-items: baseline; margin-top: 14px; padding: 16px 18px; border: 1px solid var(--rule); border-left: 3px solid var(--box); border-radius: 8px; background: var(--surface); min-height: 76px; }
+.arch-info .k { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--box-text); grid-row: span 2; padding-top: 3px; }
+.arch-info b { font-family: var(--display); font-weight: 700; font-size: 1.1rem; }
+.arch-info span.d { color: var(--muted); }
+@media (max-width: 820px) { .arch-info { grid-template-columns: 1fr; } .arch-info .k { grid-row: auto; } }
+.a-group { fill: color-mix(in srgb, var(--surface) 45%, transparent); stroke: var(--rule); stroke-width: 1.5; }
+.a-box { fill: var(--surface); stroke: var(--rule); stroke-width: 1.5; }
+.a-box.hot { stroke: var(--heat); }
+.a-box.cold { stroke: var(--ice); }
+.a-frame { fill: none; stroke: var(--rule); stroke-width: 1.5; }
+.a-line { fill: none; stroke: var(--muted); stroke-width: 1.6; }
+.a-flow { fill: none; stroke: var(--heat); stroke-width: 3.6; stroke-linecap: round; stroke-dasharray: 0.1 11; animation: dash 0.9s linear infinite; }
+.a-flow.cold { stroke: var(--ice); }
+.a-ah { fill: var(--muted); }
+.a-th { fill: var(--ink); font-family: var(--display); font-weight: 700; font-size: 17px; letter-spacing: -0.01em; }
+.a-tb { fill: var(--ink); font-family: var(--display); font-weight: 500; font-size: 13.5px; }
+.a-t { fill: var(--ink); font-family: var(--mono); font-size: 13px; }
+.a-ts { fill: var(--muted); font-family: var(--mono); font-size: 11.5px; }
+.a-hl { fill: var(--heat-ink); font-family: var(--mono); font-size: 11.5px; }
+.a-cl { fill: var(--ice); font-family: var(--mono); font-size: 11.5px; }
+.a-serif { fill: var(--ink); font-family: var(--body); font-size: 15px; }
+.cell-v { fill: var(--ice); }
+.cell-t { fill: var(--heat); }
+.themes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.theme { display: flex; flex-direction: column; gap: 12px; padding: 26px; background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; min-width: 0; transition: transform .2s ease, border-color .2s ease; }
+.theme:hover { transform: translateY(-4px); border-color: var(--heat); }
+.theme .code { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.08em; color: var(--heat-ink); }
+.theme h3 { margin: 0; font-family: var(--display); font-weight: 800; font-size: 1.45rem; line-height: 1.15; letter-spacing: -0.025em; }
+.theme p { margin: 0; color: var(--muted); }
+.theme .rel { margin-top: auto; padding-top: 8px; font-family: var(--mono); font-size: var(--s-1); text-decoration: none; }
+.theme .rel:hover { text-decoration: underline; }
+.also { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; margin: 28px 0 0; font-family: var(--mono); font-size: var(--s-1); color: var(--muted); }
+.also span { border: 1px solid var(--rule); border-radius: 999px; padding: 4px 12px; color: var(--ink); }
+
+/* publications */
+.feature { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px; padding: 34px 34px 30px; border-radius: 10px; margin-bottom: 18px; background: linear-gradient(130deg, color-mix(in srgb, var(--heat) 22%, var(--surface)), var(--surface) 55%, color-mix(in srgb, var(--ice) 18%, var(--surface))); border: 1px solid var(--rule); }
+.feature > div { min-width: 0; }
+.feature .kind { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--heat-ink); }
+.feature h3 { margin: 12px 0 10px; font-family: var(--display); font-weight: 800; font-size: clamp(1.4rem, 3vw, 2.2rem); line-height: 1.12; letter-spacing: -0.03em; text-wrap: balance; max-width: 22em; }
+.feature p { margin: 0; color: var(--muted); }
+.feature .yr { font-family: var(--display); font-weight: 800; font-size: clamp(2.6rem, 7vw, 5rem); line-height: 0.8; letter-spacing: -0.05em; color: transparent; -webkit-text-stroke: 1.5px var(--heat); align-self: end; }
+.cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.card { display: flex; flex-direction: column; gap: 10px; padding: 26px; background: var(--surface); border: 1px solid var(--rule); border-radius: 10px; transition: transform .2s ease, border-color .2s ease; min-width: 0; }
+.card:hover { transform: translateY(-3px); border-color: var(--ice); }
+.card .top { display: flex; justify-content: space-between; gap: 12px; font-family: var(--mono); font-size: 0.74rem; color: var(--muted); letter-spacing: 0.04em; }
+.card .top .k { color: var(--ice); text-transform: uppercase; letter-spacing: 0.08em; }
+.card h3 { margin: 0; font-family: var(--display); font-weight: 700; font-size: 1.22rem; line-height: 1.25; letter-spacing: -0.015em; text-wrap: balance; }
+.card .auth { margin: 0; font-size: 0.93rem; color: var(--muted); }
+.card .auth b { color: var(--ink); font-weight: 600; }
+.card .venue { margin: 0; font-style: italic; font-size: 0.95rem; }
+.card .doi { margin-top: auto; padding-top: 6px; font-family: var(--mono); font-size: var(--s-1); overflow-wrap: anywhere; }
+.card.talk { background: transparent; border-style: dashed; }
+
+/* path */
+.path { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px; }
+.path > div { min-width: 0; }
+.path h3.col { margin: 0 0 22px; font-family: var(--mono); font-size: var(--s-1); font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.steps { list-style: none; margin: 0; padding: 0 0 0 26px; position: relative; display: grid; gap: 28px; }
+.steps::before { content: ""; position: absolute; left: 6px; top: 8px; bottom: 8px; width: 2px; background: linear-gradient(var(--heat), var(--ice) 60%, var(--rule)); border-radius: 2px; }
+.steps li { position: relative; }
+.steps li::before { content: ""; position: absolute; left: -26px; top: 7px; width: 14px; height: 14px; border-radius: 50%; background: var(--bg); border: 2px solid var(--ice); }
+.steps li.now::before { background: var(--heat); border-color: var(--heat); color: var(--heat); animation: ping 2.2s infinite; }
+.steps .when { font-family: var(--mono); font-size: var(--s-1); color: var(--muted); font-variant-numeric: tabular-nums; }
+.steps h4 { margin: 2px 0; font-family: var(--display); font-weight: 700; font-size: 1.15rem; letter-spacing: -0.01em; }
+.steps p { margin: 0; color: var(--muted); font-size: 0.97rem; }
+.steps .thesis { margin-top: 6px; color: var(--ink); font-style: italic; }
+
+/* off the clock teaser */
+.teaser { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 24px; min-height: 300px; padding: 36px; border-radius: 12px; overflow: hidden; text-decoration: none; color: #f4f8fc; background: #0b111c url("banner.jpg") center / cover no-repeat; isolation: isolate; }
+.teaser::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(8,13,22,.1), rgba(8,13,22,.85)); transition: opacity .3s ease; }
+.teaser:hover::before { opacity: .8; }
+.teaser > div { min-width: 0; }
+.teaser .kick { font-family: var(--mono); font-size: var(--s-1); letter-spacing: 0.08em; text-transform: uppercase; color: #ffe14d; }
+.teaser h3 { margin: 8px 0 14px; font-family: var(--display); font-weight: 800; font-size: clamp(2.2rem, 6vw, 4.2rem); line-height: 0.95; letter-spacing: -0.04em; }
+.teaser .hobbies { display: flex; flex-wrap: wrap; gap: 8px; }
+.teaser .hobbies span { font-family: var(--mono); font-size: 0.78rem; padding: 4px 11px; border-radius: 999px; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.25); }
+.teaser .go { width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; background: #ffe14d; color: #1a1500; font-size: 1.6rem; font-weight: 700; transition: transform .25s ease; }
+.teaser:hover .go { transform: rotate(-45deg) scale(1.06); }
+
+/* contact */
+.contact-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 56px; align-items: start; }
+.contact-grid > div, .contact-grid > ul { min-width: 0; }
+.contact-grid .big { font-family: var(--display); font-weight: 800; font-size: clamp(2rem, 5vw, 3.6rem); line-height: 1; letter-spacing: -0.04em; margin: 0 0 18px; }
+.contact-grid p { margin: 0 0 14px; color: var(--muted); max-width: 30em; }
+.contact-grid p.big { color: var(--ink); }
+.langs { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0 0; padding: 0; list-style: none; }
+.langs li { font-family: var(--mono); font-size: 0.78rem; border: 1px solid var(--rule); border-radius: 999px; padding: 4px 12px; color: var(--muted); }
+.langs li b { color: var(--ink); font-weight: 500; margin-right: 6px; }
+.links { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
+.links a, .links .ph { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 4px; border-bottom: 1px solid var(--rule); text-decoration: none; color: var(--ink); font-family: var(--display); font-weight: 700; font-size: clamp(1.15rem, 2.4vw, 1.5rem); letter-spacing: -0.02em; transition: padding .2s ease, color .2s ease; }
+.links a:hover { padding-left: 14px; color: var(--heat); }
+.links small { font-family: var(--mono); font-weight: 400; font-size: 0.78rem; color: var(--muted); letter-spacing: 0; text-align: right; overflow-wrap: anywhere; }
+.links .ph { color: var(--muted); }
+
+footer { padding-block: 30px 44px; font-family: var(--mono); font-size: var(--s-1); color: var(--muted); }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; }
+
+/* motion */
+@keyframes attend { 0%,100% { transform: scaleX(1); } 50% { transform: scaleX(.55); } }
+@keyframes ping { 0% { box-shadow: 0 0 0 0 currentColor; } 70%,100% { box-shadow: 0 0 0 9px transparent; } }
+@keyframes lock { from { transform: scale(1.18); opacity: 0.35; } to { transform: none; opacity: 1; } }
+@keyframes scroll { to { transform: translateX(-50%); } }
+@keyframes drift { 0%,100% { transform: translate(0,0); } 33% { transform: translate(2px,-2px); } 66% { transform: translate(-2px,1px); } }
+@keyframes ring { 0% { transform: scale(.7); opacity: .9; } 100% { transform: scale(1.5); opacity: 0; } }
+@keyframes dash { to { stroke-dashoffset: -11.1; } }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  html { scroll-behavior: auto; }
+}
+
+/* print: the static CV, without the moving parts */
+@media print {
+  #field, .arch-info, .arch .hint, .mapdlg, .mapbtn .go { display: none !important; }
+  .hs { stroke: none !important; fill: none !important; }
+}
+/* responsive */
+@media (max-width: 960px) { .themes { grid-template-columns: 1fr; } }
+@media (max-width: 820px) {
+  .hero .wrap { grid-template-columns: 1fr; grid-template-rows: none; row-gap: 32px; padding-block: 40px 52px; }
+  .namebar, .intro, .det { grid-column: 1; grid-row: auto; }
+  .arch svg { width: 940px; max-width: none; }
+  .arch .hint { display: block; }
+  .det { max-width: 260px; }
+  .about, .contact-grid, .path { grid-template-columns: 1fr; gap: 36px; }
+  .cards { grid-template-columns: 1fr; }
+  section.layer { padding-block: 60px; }
+  .feature { grid-template-columns: 1fr; padding: 26px; }
+  .teaser { grid-template-columns: 1fr; padding: 26px; min-height: 260px; }
+}
+@media (max-width: 560px) {
+  .bar nav a:not(.pill) { display: none; }
+  .mapbtn { grid-template-columns: minmax(0, 1fr) auto; }
+  .mapbtn .mini { grid-column: 1 / -1; width: 100%; max-height: 110px; }
+  .tok .val { display: none; }
+  .jp { letter-spacing: 0.04em; gap: 10px; }
+  .tok .meta { top: calc(100% + 5px); gap: 3px; }
+  .facts div { grid-template-columns: 1fr; gap: 2px; }
+}
+
+/* career map popup: the career-map page CSS scoped under .mapdlg (generated once by v6tools/scopecss.py, then edited by hand) */
+/* popup chrome: a sheet over the dimmed CV, a bar with the title and a close button, a scrolling body */
+html { scrollbar-gutter: stable; }
+html.dlg-open { overflow: hidden; }
+.mapdlg { position: fixed; inset: 0; width: 100%; height: 100%; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; background: transparent; color: var(--ink); overflow: hidden; font-family: var(--body); font-size: var(--s0); line-height: 1.6;
+  --ph: clamp(400px, calc(100vh - 292px), 700px); }
+.mapdlg:not([open]) { display: none; }
+.mapdlg::backdrop { background: rgba(4, 7, 12, .74); -webkit-backdrop-filter: blur(5px); backdrop-filter: blur(5px); }
+.mapdlg .sheet { position: absolute; top: max(20px, env(safe-area-inset-top, 0px)); bottom: max(20px, env(safe-area-inset-bottom, 0px)); left: max(20px, env(safe-area-inset-left, 0px)); right: max(20px, env(safe-area-inset-right, 0px));
+  max-width: 1280px; margin-inline: auto; display: flex; flex-direction: column; background: var(--bg); border: 1px solid var(--rule-2); border-radius: 18px; overflow: hidden; box-shadow: 0 40px 120px -30px rgba(0, 0, 0, .75); }
+.mapdlg[open] .sheet { animation: sheetin .32s cubic-bezier(.2, .8, .2, 1); }
+.mapdlg[open]::backdrop { animation: dimin .25s ease; }
+@keyframes sheetin { from { transform: translateY(22px) scale(.985); opacity: 0; } }
+@keyframes dimin { from { opacity: 0; } }
+.mapdlg .dbar { flex: none; display: flex; align-items: center; flex-wrap: wrap; gap: 8px 16px; padding: 12px 14px 12px 24px; border-bottom: 1px solid var(--rule); background: var(--bg-2); }
+.mapdlg .dbar .idx { font-family: var(--mono); font-size: var(--s-1); color: var(--heat-ink); letter-spacing: 0.06em; }
+.mapdlg .dbar h2 { margin: 0; font-family: var(--display); font-weight: 800; font-size: clamp(1.45rem, 3vw, 2.1rem); letter-spacing: -0.035em; line-height: 1; }
+.mapdlg .dbar .pos { font-family: var(--mono); font-size: var(--s-1); color: var(--muted); border: 1px solid var(--rule); padding: 2px 8px; border-radius: 3px; }
+.mapdlg .dclose { margin-left: auto; display: inline-flex; align-items: center; gap: 8px; min-height: 42px; padding: 0 18px 0 15px; border: 0; border-radius: 999px; background: var(--box); color: var(--box-ink); font-family: var(--mono); font-size: 0.86rem; font-weight: 700; cursor: pointer; box-shadow: 0 8px 22px -10px var(--box); transition: transform .15s ease, filter .15s ease; }
+.mapdlg .dclose span { font-size: 1.05rem; line-height: 1; }
+.mapdlg .dclose:hover { filter: brightness(1.06); transform: translateY(-1px); }
+.mapdlg .dclose:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; border-radius: 999px; }
+.mapdlg .dbody { flex: 1 1 auto; min-height: 0; overflow: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; padding: 22px 26px 30px; }
+.mapdlg .msr { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+@media (max-height: 820px) and (min-width: 641px) { .mapdlg .sheet { top: 10px; bottom: 10px; } .mapdlg { --ph: clamp(380px, calc(100vh - 272px), 700px); } }
+/* short screens (phones on their side): the sheet fills the screen and the bar gets slim */
+@media (max-height: 500px) {
+  .mapdlg .sheet { inset: 0; border: 0; border-radius: 0; }
+  .mapdlg .dbar { padding-block: 6px; }
+  .mapdlg .dbar .idx, .mapdlg .dbar .pos { display: none; }
+  .mapdlg .dclose { min-height: 38px; }
+}
+@media (max-width: 640px) {
+  .mapdlg .sheet { inset: 0; border: 0; border-radius: 0; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+  .mapdlg .dbar { padding: 10px max(12px, env(safe-area-inset-right, 0px)) 10px max(16px, env(safe-area-inset-left, 0px)); }
+  .mapdlg .dbar .idx, .mapdlg .dbar .pos { display: none; }
+  .mapdlg .dbody { padding: 14px max(16px, env(safe-area-inset-right, 0px)) 24px max(16px, env(safe-area-inset-left, 0px)); }
+}
+@media (prefers-reduced-motion: reduce) { .mapdlg[open]::backdrop { animation: none; } }
+/* intro */
+.mapdlg .mintro { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+/* q = query */
+.mapdlg .query { margin-top: 0; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: stretch; border-radius: 14px; border: 1px solid var(--rule-2); background: var(--surface); overflow: hidden; transition: border-color .2s ease, box-shadow .2s ease; }
+.mapdlg .query:focus-within { border-color: var(--heat); box-shadow: 0 0 0 3px color-mix(in srgb, var(--heat) 22%, transparent); }
+.mapdlg .query label { display: grid; place-items: center; padding: 0 16px; font-family: var(--mono); font-size: 0.86rem; font-weight: 700; color: var(--heat-ink); border-right: 1px solid var(--rule); white-space: nowrap; }
+.mapdlg .query input { min-width: 0; border: 0; border-radius: 0; background: transparent; color: var(--ink); font-family: var(--mono); font-size: 0.9rem; padding: 15px 14px; outline: none; -webkit-appearance: none; appearance: none; }
+.mapdlg .query input::placeholder { color: var(--muted); }
+.mapdlg .query button { border: 0; background: linear-gradient(100deg, var(--heat), var(--box)); color: var(--box-ink); font-family: var(--mono); font-weight: 700; font-size: 0.82rem; padding: 0 20px; cursor: pointer; white-space: nowrap; }
+.mapdlg .query button:hover { filter: brightness(1.06); }
+.mapdlg .query button:focus-visible { outline-offset: -4px; }
+.mapdlg .qchips { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 0; align-items: center; font-family: var(--mono); font-size: 0.78rem; color: var(--muted); }
+.mapdlg .qchips button { font: inherit; color: var(--ink); background: transparent; border: 1px solid var(--rule); border-radius: 999px; padding: 4px 12px; cursor: pointer; transition: border-color .18s ease; }
+.mapdlg .qchips button:hover { border-color: var(--heat); }
+/* figure */
+.mapdlg .fig1 { margin: 18px 0 0; }
+.mapdlg .figbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 16px; margin-bottom: 10px; font-family: var(--mono); font-size: var(--s-1); color: var(--muted); }
+.mapdlg .figbar b { color: var(--heat-ink); font-weight: 500; }
+.mapdlg .vt { display: inline-flex; gap: 2px; padding: 3px; border: 1px solid var(--rule); border-radius: 999px; background: var(--surface); }
+.mapdlg .vt button { font-family: var(--mono); font-size: 0.78rem; color: var(--muted); background: transparent; border: 0; border-radius: 999px; padding: 4px 14px; cursor: pointer; }
+.mapdlg .vt button:hover { color: var(--ink); }
+.mapdlg .vt button[aria-pressed="true"] { background: var(--box); color: var(--box-ink); font-weight: 700; }
+.mapdlg .fig1-grid { display: grid; grid-template-columns: minmax(0, 1fr) 320px; border: 1px solid var(--rule); border-radius: 14px; background: var(--surface); overflow: hidden; }
+.mapdlg .plot { position: relative; min-width: 0; height: var(--ph); overflow: hidden; border-right: 1px solid var(--rule); display: flex; flex-direction: column;
+  background-image: linear-gradient(var(--grid-major) 1px, transparent 1px), linear-gradient(90deg, var(--grid-major) 1px, transparent 1px), linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 112px 112px, 112px 112px, 16px 16px, 16px 16px; touch-action: pan-y; }
+.mapdlg #space { position: relative; flex: 1 1 auto; min-height: 0; width: 100%; display: block; }
+.mapdlg #space text { font-family: var(--display); }
+.mapdlg #space .ax { font-family: var(--mono); font-size: 10px; fill: var(--muted); }
+.mapdlg .plot .hud { position: absolute; left: 12px; top: 12px; z-index: 2; font-family: var(--mono); font-size: 0.72rem; color: var(--ink-2); background: color-mix(in srgb, var(--surface) 88%, transparent); padding: 4px 11px; border-radius: 999px; border: 1px solid var(--rule); pointer-events: none; font-variant-numeric: tabular-nums; }
+.mapdlg .plot .hud b { color: var(--heat-ink); font-weight: 700; }
+.mapdlg .plot .hud b.ok { color: var(--go-ink); }
+.mapdlg .plot .ctl { position: absolute; right: 12px; top: 12px; z-index: 2; display: flex; gap: 6px; }
+.mapdlg .plot .ctl button { font-family: var(--mono); font-size: 0.72rem; color: var(--ink); background: var(--surface); border: 1px solid var(--rule-2); border-radius: 999px; padding: 4px 12px; cursor: pointer; }
+.mapdlg .plot .ctl button:hover { border-color: var(--heat); }
+.mapdlg .mlegend { flex: none; display: flex; flex-wrap: wrap; gap: 5px; padding: 9px 10px; border-top: 1px solid var(--rule); background: var(--surface); }
+.mapdlg .mlegend button { display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 0.72rem; color: var(--ink-2); background: transparent; border: 1px solid var(--rule); border-radius: 999px; padding: 3px 9px 3px 8px; cursor: pointer; }
+.mapdlg .mlegend button:hover { border-color: var(--c); color: var(--ink); }
+.mapdlg .mlegend i { width: 9px; height: 9px; border-radius: 50%; background: var(--c); flex: none; }
+/* marks */
+.mapdlg .edge { stroke: var(--ink); stroke-opacity: .12; stroke-width: 1; transition: stroke-opacity .25s ease; }
+.mapdlg .edge.on { stroke: var(--sel, var(--ink)); stroke-opacity: .9; stroke-width: 1.6; }
+.mapdlg .ql { stroke: var(--q); stroke-linecap: round; stroke-dasharray: .1 7; animation: mdash .9s linear infinite; }
+.mapdlg .node { cursor: pointer; transition: opacity .3s ease; }
+.mapdlg .node .hit { fill: transparent; }
+.mapdlg .node .dot { fill: var(--c); stroke: var(--surface); stroke-width: 2; }
+.mapdlg .node .ring { fill: none; stroke: var(--ink); stroke-width: 1.5; opacity: 0; transition: opacity .2s ease; }
+.mapdlg .node .lbl { font-size: 13px; font-weight: 500; fill: var(--ink-2); paint-order: stroke; stroke: var(--surface); stroke-width: 4px; stroke-linejoin: round; transition: opacity .2s ease; }
+.mapdlg .node:hover .ring, .mapdlg .node:focus .ring, .mapdlg .node.sel .ring, .mapdlg .node.hit-q .ring { opacity: 1; }
+.mapdlg .node:focus-visible .ring { stroke-width: 2.5; }
+.mapdlg .node:hover .lbl, .mapdlg .node.sel .lbl, .mapdlg .node.hit-q .lbl { font-weight: 700; fill: var(--ink); opacity: 1 !important; }
+.mapdlg .node:focus { outline: none; }
+.mapdlg #space.dim .node:not(.sel):not(.nb):not(.hit-q):not(:hover) { opacity: .18; }
+.mapdlg #space.dim .clab:not(.on) { opacity: .3; }
+.mapdlg .me-ring { fill: none; stroke: var(--ink); stroke-width: 1.5; }
+.mapdlg .me-ring2 { fill: none; stroke: var(--heat); stroke-width: 1.4; stroke-dasharray: .1 6; stroke-linecap: round; }
+.mapdlg .clab { cursor: pointer; transition: opacity .25s ease; }
+.mapdlg .clab text { font-weight: 800; font-size: 18px; letter-spacing: -0.02em; fill: var(--ct, var(--c)); paint-order: stroke; stroke: var(--surface); stroke-width: 5px; stroke-linejoin: round; }
+.mapdlg .clab:hover text, .mapdlg .clab.on text { text-decoration: underline; }
+.mapdlg .qmark path { fill: var(--q); stroke: var(--surface); stroke-width: 2; }
+.mapdlg .qmark text { font-family: var(--mono); font-size: 11px; font-weight: 700; fill: var(--ink); paint-order: stroke; stroke: var(--surface); stroke-width: 3px; }
+.mapdlg .c-research { --c: var(--k-research); --ct: var(--kt-research); }
+.mapdlg .c-models { --c: var(--k-models); --ct: var(--kt-models); }
+.mapdlg .c-pubs { --c: var(--k-pubs); --ct: var(--kt-pubs); }
+.mapdlg .c-edu { --c: var(--k-edu); --ct: var(--kt-edu); }
+.mapdlg .c-work { --c: var(--k-work); --ct: var(--kt-work); }
+.mapdlg .c-life { --c: var(--k-life); --ct: var(--kt-life); }
+.mapdlg .c-me { --c: var(--k-me); --ct: var(--kt-me); }
+/* phones: labels only for the selected point, its neighbours, query hits and the zoomed cluster; a label with no room hides */
+.mapdlg .small-labels .node .lbl { opacity: 0; font-size: 11.5px; }
+.mapdlg .small-labels .node.nb .lbl { opacity: 1; }
+.mapdlg .small-labels .node:not(.sel):not(.hit-q):not(.nb) .lbl, .mapdlg #space .node .lbl.lh { pointer-events: none; }
+.mapdlg #space .node .lbl.lh { opacity: 0 !important; }
+.mapdlg #space .node:hover .lbl.lh, .mapdlg #space .node:focus-visible .lbl.lh { opacity: 1 !important; }
+.mapdlg .compact-labels .node .lbl { font-size: 11px; }
+.mapdlg .compact-labels .clab text { font-size: 15px; }
+.mapdlg .small-labels .clab:not(.on) { display: none; }
+/* details panel */
+.mapdlg .panel { position: relative; min-width: 0; padding: 20px 20px 22px; display: flex; flex-direction: column; gap: 10px; max-height: var(--ph); overflow: auto; scroll-margin-top: 16px; scroll-margin-bottom: 96px; }
+.mapdlg .panel .pk { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ct, var(--heat-ink)); display: flex; align-items: center; gap: 8px; padding-right: 86px; }
+.mapdlg .panel .pk i { width: 9px; height: 9px; border-radius: 50%; background: var(--c, var(--heat)); flex: none; }
+.mapdlg .panel h3 { margin: 0; font-family: var(--display); font-weight: 800; font-size: 1.5rem; line-height: 1.12; letter-spacing: -0.025em; text-wrap: balance; outline: none; }
+.mapdlg .panel .meta2 { margin: 0; font-family: var(--mono); font-size: 0.74rem; color: var(--muted); line-height: 1.6; }
+.mapdlg .panel p { margin: 0; color: var(--ink-2); }
+.mapdlg .panel .keys { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); line-height: 1.7; }
+@media (hover: none) and (pointer: coarse) {
+  .mapdlg .panel .keys { display: none; }
+}
+.mapdlg .panel .keys kbd { font-family: inherit; color: var(--ink); border: 1px solid var(--rule-2); border-bottom-width: 2px; border-radius: 4px; padding: 0 5px; }
+.mapdlg .panel .plinks { display: flex; flex-wrap: wrap; gap: 6px 16px; font-family: var(--mono); font-size: 0.8rem; }
+.mapdlg .panel h4 { margin: 8px 0 0; font-family: var(--mono); font-size: 0.72rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.mapdlg .panel ol { list-style: none; margin: 0; padding: 0; display: grid; }
+.mapdlg .panel li button { width: 100%; display: grid; grid-template-columns: 10px minmax(0, 1fr) auto; align-items: center; gap: 10px; text-align: left; font-family: var(--display); font-weight: 500; font-size: 0.98rem; line-height: 1.3; color: var(--ink); background: transparent; border: 0; border-bottom: 1px solid var(--rule); padding: 9px 2px; cursor: pointer; }
+.mapdlg .panel li button:hover { background: var(--hl); }
+.mapdlg .panel li button i { width: 8px; height: 8px; border-radius: 50%; background: var(--c); }
+.mapdlg .panel .sim { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); display: flex; align-items: center; gap: 6px; font-variant-numeric: tabular-nums; }
+.mapdlg .panel .sim s { display: inline-block; height: 5px; width: 44px; border-radius: 3px; background: linear-gradient(90deg, var(--ice), var(--heat) var(--w), var(--rule) var(--w)); text-decoration: none; }
+.mapdlg .panel .x { position: absolute; right: 12px; top: 14px; font-family: var(--mono); font-size: 0.7rem; background: none; border: 1px solid var(--rule); border-radius: 999px; color: var(--muted); cursor: pointer; padding: 2px 9px; }
+.mapdlg .panel .x:hover { border-color: var(--heat); color: var(--ink); }
+/* list view: the same space as a plain list */
+.mapdlg .maplist { display: none; min-width: 0; padding: 18px 20px; max-height: var(--ph); overflow: auto; border-right: 1px solid var(--rule); }
+.mapdlg .maplist h3 { margin: 20px 0 6px; font-family: var(--display); font-weight: 800; font-size: 1.2rem; letter-spacing: -0.02em; color: var(--ct, var(--c)); }
+.mapdlg .maplist h3:first-child { margin-top: 0; }
+.mapdlg .maplist ul { list-style: none; margin: 0; padding: 0; }
+.mapdlg .maplist button { width: 100%; text-align: left; font-family: var(--display); font-weight: 500; font-size: 1rem; line-height: 1.35; color: var(--ink); background: transparent; border: 0; border-bottom: 1px solid var(--rule); padding: 8px 2px; cursor: pointer; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; }
+.mapdlg .maplist button span { font-family: var(--mono); font-weight: 400; font-size: 0.72rem; color: var(--muted); align-self: center; white-space: nowrap; }
+.mapdlg .maplist button:hover { background: var(--hl); }
+.mapdlg .fig1.as-list .plot { display: none; }
+.mapdlg .fig1.as-list .maplist { display: block; }
+.mapdlg .mcap { margin: 14px 0 0; max-width: 62em; font-size: 0.95rem; line-height: 1.55; color: var(--muted); }
+.mapdlg .mcap b { font-family: var(--mono); font-size: var(--s-1); font-weight: 500; color: var(--heat-ink); margin-right: 8px; }
+@keyframes mdash { to { stroke-dashoffset: -7.1; } }
+@media (prefers-reduced-motion: reduce) {
+  .mapdlg, .mapdlg *, .mapdlg *::before, .mapdlg *::after { animation: none !important; transition: none !important; }
+}
+@media (max-width: 900px) {
+  .mapdlg .fig1-grid { grid-template-columns: 1fr; }
+  .mapdlg .plot { border-right: 0; border-bottom: 1px solid var(--rule); height: clamp(420px, calc(100vh - 300px), 560px); }
+  .mapdlg .maplist { border-right: 0; border-bottom: 1px solid var(--rule); }
+  .mapdlg .panel, .mapdlg .maplist { max-height: none; }
+}
+@media (max-width: 860px) {
+  .mapdlg .plot { height: clamp(400px, calc(100vh - 280px), 500px); }
+  .mapdlg .query label { padding: 0 11px; }
+  .mapdlg .query button { padding: 0 14px; }
+}
+/* touch: roomier secondary controls */
+@media (pointer: coarse) {
+  .mapdlg .panel .x, .mapdlg .mlegend button, .mapdlg .vt button, .mapdlg .plot .ctl button { min-height: 32px; }
+  .mapdlg .panel .plinks a { display: inline-block; padding-block: 6px; }
+}
+@media (max-width: 640px) {
+  .mapdlg .plot .ctl .bt { display: none; }
+  .mapdlg .plot .ctl button { padding: 4px 10px; font-size: 0.8rem; }
+  .mapdlg .mlegend button { padding: 3px 9px; }
+}
+@media (max-width: 420px) {
+  .mapdlg .figbar .np { display: none; }
+  .mapdlg .query input { padding: 13px 10px; font-size: 0.84rem; }
+  .mapdlg .query button { padding: 0 12px; }
+}
+/* phones: the example queries sit on one row that scrolls sideways, fading out at the edge */
+@media (max-width: 640px) {
+  .mapdlg .qchips { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; scrollbar-width: none; -webkit-mask-image: linear-gradient(90deg, #000 86%, transparent); mask-image: linear-gradient(90deg, #000 86%, transparent); }
+  .mapdlg .qchips::-webkit-scrollbar { display: none; }
+  .mapdlg .qchips > * { flex: none; }
+  .mapdlg .qchips > :last-child { margin-right: 28px; }
+}
+
+</style>
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
+</head>
+<body>
+<header class="bar gut">
+  <div class="wrap">
+    <a class="logo" href="#top">saiful<span>.</span>azam</a>
+    <nav aria-label="Sections">
+      <a href="#about">about</a>
+      <a href="#research">research</a>
+      <a href="#publications">publications</a>
+      <a href="#path">path</a>
+      <a href="#contact">contact</a>
+      <a class="pill" href="personal.html">personal ↗</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero gut" id="top">
+  <canvas id="field" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="namebar">
+      <p class="eyebrow"><b>Researcher</b><span>Kitami Institute of Technology</span><span>Hokkaido, Japan</span><span class="live">Open to research roles</span></p>
+      <h1 class="tokens" id="name" aria-label="Nor Saiful Azam bin Nor Azmi"><span class="line">
+          <span class="tok" style="--a:8%;--d:0.10s">Nor</span>
+          <span class="tok" style="--a:85%;--d:0.22s">Saiful</span>
+          <span class="tok" style="--a:55%;--d:0.34s">Azam</span>
+          <span class="tok" style="--a:10%;--d:0.46s">bin</span>
+          <span class="tok" style="--a:18%;--d:0.58s">Nor</span>
+          <span class="tok" style="--a:62%;--d:0.70s">Azmi</span>
+      </span></h1>
+      <p class="jp"><span class="lang">ja</span><span lang="ja">ノーサイフルアザムビンノーアズミ</span></p>
+    </div>
+    <div class="intro">
+      <p class="lede">I'm an AI researcher working on how machines understand <span class="hl">language and images</span>, and how that understanding can help make online spaces safer.</p>
+      <div class="actions">
+        <a class="btn hot" href="personal.html">See my personal side <span class="arr" aria-hidden="true">→</span></a>
+        <a class="btn" href="#publications">Read my work <span class="arr" aria-hidden="true">↓</span></a>
+      </div>
+    </div>
+    <figure class="det">
+      <div class="frame">
+        <img src="photo.jpg" alt="Nor Saiful Azam in a dark suit, smiling, outside on campus" width="336" height="420">
+        <div class="grid" aria-hidden="true"></div>
+        <div class="bbox" aria-hidden="true"><span>researcher · 0.99</span></div>
+      </div>
+      <figcaption><span>saiful.jpg · 336×420</span><span>label: <b>not_hateful</b></span></figcaption>
+    </figure>
+  </div>
+</div>
+
+<div class="ticker" aria-hidden="true">
+  <div class="track">
+    <ul><li>multimodal machine learning</li><li>hateful meme detection</li><li>cyberbullying detection</li><li>transformers</li><li>vision-language models</li><li>explainable AI</li><li>part-of-speech fusion</li><li>content moderation</li><li>NLP</li></ul>
+    <ul><li>multimodal machine learning</li><li>hateful meme detection</li><li>cyberbullying detection</li><li>transformers</li><li>vision-language models</li><li>explainable AI</li><li>part-of-speech fusion</li><li>content moderation</li><li>NLP</li></ul>
+  </div>
+</div>
+
+<main>
+  <section class="layer gut" id="about">
+    <div class="wrap">
+      <div class="head"><span class="idx">layer_01</span><h2>About</h2><span class="pos">PRP · VBZ</span></div>
+      <div class="about">
+        <div>
+          <p class="big">I'm a researcher at the Kitami Institute of Technology, specializing in natural language processing and artificial intelligence.</p>
+          <p>My research centers on multimodal content analysis and AI-driven content moderation. I work with transformer and vision-language architectures to detect harmful online content and cyberbullying, from models that read text alone to multimodal frameworks that combine language and vision, such as the ones needed to understand hateful memes.</p>
+          <p>I did my Ph.D. in the Text Information Processing Laboratory (TiP Lab) under Professor Michal Ptaszynski.</p>
+        </div>
+        <div class="side">
+        <dl class="facts">
+          <div><dt>Now</dt><dd>Researcher, Kitami Institute of Technology</dd></div>
+          <div><dt>Ph.D.</dt><dd>Co-Creative Engineering, 2026</dd></div>
+          <div><dt>Lab</dt><dd><a href="https://kit-tiplab.github.io/" target="_blank" rel="noopener">TiP Lab</a>, Prof. Michal Ptaszynski</dd></div>
+          <div><dt>Based in</dt><dd>Kitami, Hokkaido, Japan</dd></div>
+        </dl>
+        <button type="button" class="mapbtn" id="mapOpen" aria-haspopup="dialog" aria-controls="mapDlg">
+          <svg class="mini" viewBox="0 0 132 84" aria-hidden="true">
+            <g class="e"><path d="M66 46 L28 22 M66 46 L102 18 M66 46 L112 56 M66 46 L40 68 M66 46 L84 74 M28 22 L16 44 M102 18 L112 56 M40 68 L16 44"/></g>
+            <circle class="p p1" cx="28" cy="22" r="4.5"/><circle class="p p2" cx="102" cy="18" r="4"/><circle class="p p3" cx="112" cy="56" r="5"/>
+            <circle class="p p4" cx="40" cy="68" r="4"/><circle class="p p5" cx="84" cy="74" r="3.5"/><circle class="p p6" cx="16" cy="44" r="3.5"/>
+            <circle class="me" cx="66" cy="46" r="8"/><circle class="ring" cx="66" cy="46" r="13"/>
+          </svg>
+          <span class="t"><span class="k" aria-hidden="true">NN · interactive</span><b>Explore my career map</b><small>Papers, degrees, jobs, models and hobbies as points you can click or search.</small></span>
+          <span class="go" aria-hidden="true">→</span>
+        </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="layer gut" id="research">
+    <div class="wrap">
+      <div class="head"><span class="idx">layer_02</span><h2>Research</h2><span class="pos">NN · themes</span></div>
+      <figure class="arch" id="fig-arch">
+        <div class="arch-scroll">
+        <svg viewBox="0 0 1240 590" role="group" aria-labelledby="arch-title" aria-describedby="arch-desc">
+          <title id="arch-title">Multimodal hateful meme detection architecture</title>
+          <desc id="arch-desc">The meme image goes through a Vision Transformer to a 768-dimensional visual vector. The meme text, plus a caption generated from the image by MoonDream, goes through RoBERTa to a 768-dimensional textual vector. The two vectors are concatenated into 1536 dimensions and passed through a dense layer with ReLU (1536 by 512), dropout of 0.1 and a linear layer (512 by 2), and a softmax gives the probability of hateful and non-hateful.</desc>
+          <g aria-hidden="true">
+          <defs>
+            <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto-start-reverse"><path class="a-ah" d="M0,0 L10,5 L0,10 z"/></marker>
+            <clipPath id="memeclip"><rect x="40" y="75" width="140" height="140" rx="6"/></clipPath>
+          </defs>
+
+          <!-- visual stream input -->
+          <text class="a-th" x="40" y="60">Visual stream</text>
+          <image href="meme.jpg" x="40" y="75" width="140" height="140" preserveAspectRatio="xMidYMid slice" clip-path="url(#memeclip)"/>
+          <rect class="a-frame" x="40" y="75" width="140" height="140" rx="6"/>
+
+          <!-- captioning -->
+          <path class="a-flow cold" d="M110 215 V259" marker-end="url(#ah)"/>
+          <rect class="a-box" x="35" y="262" width="150" height="66" rx="6"/><text text-anchor="middle"><tspan x="110.0" y="291.5" class="a-th">MoonDream</tspan><tspan x="110.0" y="308.5" class="a-ts">image captioning</tspan></text>
+          <path class="a-flow cold" d="M185 295 H226 V469" marker-end="url(#ah)"/>
+          <text class="a-cl" text-anchor="middle" transform="rotate(-90 243 382)" x="243" y="382">generated caption</text>
+
+          <!-- textual stream input -->
+          <text class="a-th" x="40" y="425">Textual stream</text>
+          <rect class="a-box" x="35" y="437" width="160" height="76" rx="6"/>
+          <text class="a-serif" text-anchor="middle"><tspan x="115" y="470">I ate too much.</tspan><tspan x="115" y="491">It was glorious</tspan></text>
+
+          <!-- ViT -->
+          <rect class="a-group" x="262" y="40" width="320" height="190" rx="10"/>
+          <text class="a-th" x="422" y="66" text-anchor="middle">Vision Transformer (ViT)</text>
+          <rect class="a-box" x="277" y="80" width="84" height="130" rx="6"/><text text-anchor="middle"><tspan x="319.0" y="141.5" class="a-tb">Patch</tspan><tspan x="319.0" y="158.5" class="a-tb">embedding</tspan></text>
+          <rect class="a-box" x="380" y="80" width="84" height="130" rx="6"/><text text-anchor="middle"><tspan x="422.0" y="133.0" class="a-tb">Transformer</tspan><tspan x="422.0" y="150.0" class="a-tb">encoder</tspan><tspan x="422.0" y="167.0" class="a-tb">layers</tspan></text>
+          <rect class="a-box" x="483" y="80" width="84" height="130" rx="6"/><text text-anchor="middle"><tspan x="525.0" y="141.5" class="a-tb">[CLS]</tspan><tspan x="525.0" y="158.5" class="a-tb">token</tspan></text>
+          <path class="a-line" d="M361 145 H377" marker-end="url(#ah)"/>
+          <path class="a-line" d="M464 145 H480" marker-end="url(#ah)"/>
+          <path class="a-flow cold" d="M180 145 H274" marker-end="url(#ah)"/>
+
+          <!-- RoBERTa -->
+          <rect class="a-group" x="262" y="370" width="320" height="190" rx="10"/>
+          <text class="a-th" x="422" y="396" text-anchor="middle">RoBERTa</text>
+          <rect class="a-box" x="277" y="410" width="84" height="130" rx="6"/><text text-anchor="middle"><tspan x="319.0" y="480.0" class="a-tb">Tokenizer</tspan></text>
+          <rect class="a-box" x="380" y="410" width="84" height="130" rx="6"/><text text-anchor="middle"><tspan x="422.0" y="463.0" class="a-tb">Transformer</tspan><tspan x="422.0" y="480.0" class="a-tb">encoder</tspan><tspan x="422.0" y="497.0" class="a-tb">layers</tspan></text>
+          <rect class="a-box" x="483" y="410" width="84" height="130" rx="6"/><text text-anchor="middle"><tspan x="525.0" y="480.0" class="a-tb">Pooler</tspan></text>
+          <path class="a-line" d="M361 475 H377" marker-end="url(#ah)"/>
+          <path class="a-line" d="M464 475 H480" marker-end="url(#ah)"/>
+          <path class="a-flow" d="M195 475 H274" marker-end="url(#ah)"/>
+
+          <!-- feature vectors -->
+          <path class="a-flow cold" d="M567 145 H619" marker-end="url(#ah)"/>
+          
+          <rect class="a-frame" x="622" y="85" width="24" height="122" rx="3"/>
+          <rect class="cell-v" x="625" y="88" width="18" height="12" rx="1.5" opacity="0.35"/><rect class="cell-v" x="625" y="103" width="18" height="12" rx="1.5" opacity="0.61"/><rect class="cell-v" x="625" y="118" width="18" height="12" rx="1.5" opacity="0.87"/><rect class="cell-v" x="625" y="133" width="18" height="12" rx="1.5" opacity="0.41"/><rect class="cell-v" x="625" y="148" width="18" height="12" rx="1.5" opacity="0.68"/><rect class="cell-v" x="625" y="163" width="18" height="12" rx="1.5" opacity="0.94"/><rect class="cell-v" x="625" y="178" width="18" height="12" rx="1.5" opacity="0.48"/><rect class="cell-v" x="625" y="193" width="18" height="12" rx="1.5" opacity="0.74"/>
+          <path class="a-flow" d="M567 475 H619" marker-end="url(#ah)"/>
+          <rect class="a-frame" x="622" y="415" width="24" height="122" rx="3"/>
+          <rect class="cell-t" x="625" y="418" width="18" height="12" rx="1.5" opacity="0.35"/><rect class="cell-t" x="625" y="433" width="18" height="12" rx="1.5" opacity="0.61"/><rect class="cell-t" x="625" y="448" width="18" height="12" rx="1.5" opacity="0.87"/><rect class="cell-t" x="625" y="463" width="18" height="12" rx="1.5" opacity="0.41"/><rect class="cell-t" x="625" y="478" width="18" height="12" rx="1.5" opacity="0.68"/><rect class="cell-t" x="625" y="493" width="18" height="12" rx="1.5" opacity="0.94"/><rect class="cell-t" x="625" y="508" width="18" height="12" rx="1.5" opacity="0.48"/><rect class="cell-t" x="625" y="523" width="18" height="12" rx="1.5" opacity="0.74"/>
+          
+
+          <!-- concatenation -->
+          <path class="a-flow cold" d="M650 150 L712 236" marker-end="url(#ah)"/>
+          <path class="a-flow" d="M650 470 L712 384" marker-end="url(#ah)"/>
+          
+          <rect class="a-frame" x="716" y="232" width="24" height="156" rx="3"/>
+          <rect class="cell-v" x="719" y="235.0" width="18" height="12.5" rx="1.5" opacity="0.35"/><rect class="cell-v" x="719" y="250.5" width="18" height="12.5" rx="1.5" opacity="0.61"/><rect class="cell-v" x="719" y="266.0" width="18" height="12.5" rx="1.5" opacity="0.87"/><rect class="cell-v" x="719" y="281.5" width="18" height="12.5" rx="1.5" opacity="0.41"/><rect class="cell-v" x="719" y="297.0" width="18" height="12.5" rx="1.5" opacity="0.68"/><rect class="cell-t" x="719" y="313.0" width="18" height="12.5" rx="1.5" opacity="0.35"/><rect class="cell-t" x="719" y="328.5" width="18" height="12.5" rx="1.5" opacity="0.61"/><rect class="cell-t" x="719" y="344.0" width="18" height="12.5" rx="1.5" opacity="0.87"/><rect class="cell-t" x="719" y="359.5" width="18" height="12.5" rx="1.5" opacity="0.41"/><rect class="cell-t" x="719" y="375.0" width="18" height="12.5" rx="1.5" opacity="0.68"/>
+
+          <!-- classifier head -->
+          <path class="a-flow" d="M740 310 H803" marker-end="url(#ah)"/>
+          <rect class="a-group" x="790" y="215" width="290" height="190" rx="10"/>
+          <text class="a-th" x="935" y="241" text-anchor="middle">Classifier head</text>
+          <rect class="a-box" x="806" y="256" width="74" height="134" rx="6"/><text text-anchor="middle"><tspan x="843.0" y="311.0" class="a-tb">Dense</tspan><tspan x="843.0" y="328.0" class="a-ts">1536×512</tspan><tspan x="843.0" y="345.0" class="a-ts">ReLU</tspan></text>
+          <rect class="a-box" x="898" y="256" width="74" height="134" rx="6"/><text text-anchor="middle"><tspan x="935.0" y="319.5" class="a-tb">Dropout</tspan><tspan x="935.0" y="336.5" class="a-ts">0.1</tspan></text>
+          <rect class="a-box" x="990" y="256" width="74" height="134" rx="6"/><text text-anchor="middle"><tspan x="1027.0" y="319.5" class="a-tb">Linear</tspan><tspan x="1027.0" y="336.5" class="a-ts">512×2</tspan></text>
+          <path class="a-line" d="M880 323 H895" marker-end="url(#ah)"/>
+          <path class="a-line" d="M972 323 H987" marker-end="url(#ah)"/>
+
+          <!-- softmax outputs -->
+          <path class="a-flow" d="M1064 323 L1108 280" marker-end="url(#ah)"/>
+          <path class="a-flow cold" d="M1064 323 L1108 366" marker-end="url(#ah)"/>
+          <circle class="a-box hot" cx="1124" cy="270" r="15"/>
+          <circle class="a-box cold" cx="1124" cy="376" r="15"/>
+          <text x="1148" y="268"><tspan class="a-t">Hateful</tspan><tspan class="a-ts" x="1148" y="286">probability</tspan></text>
+          <text x="1148" y="374"><tspan class="a-t">Non-hateful</tspan><tspan class="a-ts" x="1148" y="392">probability</tspan></text>
+          </g>
+
+          <!-- hover / tap hotspots (Save Point 2) -->
+          <rect class="hs" x="40" y="75" width="140" height="140" rx="10" tabindex="0" role="button" data-k="meme"><title>Meme image</title></rect>
+          <rect class="hs" x="31" y="258" width="158" height="74" rx="10" tabindex="0" role="button" data-k="moon"><title>MoonDream</title></rect>
+          <rect class="hs" x="31" y="433" width="168" height="84" rx="10" tabindex="0" role="button" data-k="text"><title>Meme text</title></rect>
+          <rect class="hs" x="258" y="36" width="328" height="198" rx="10" tabindex="0" role="button" data-k="vit"><title>Vision Transformer (ViT)</title></rect>
+          <rect class="hs" x="258" y="366" width="328" height="198" rx="10" tabindex="0" role="button" data-k="rob"><title>RoBERTa</title></rect>
+          <rect class="hs" x="612" y="78" width="140" height="466" rx="10" tabindex="0" role="button" data-k="fuse"><title>Concatenation</title></rect>
+          <rect class="hs" x="786" y="211" width="298" height="198" rx="10" tabindex="0" role="button" data-k="head"><title>Classifier head</title></rect>
+          <rect class="hs" x="1100" y="245" width="136" height="160" rx="10" tabindex="0" role="button" data-k="out"><title>Prediction</title></rect>
+        </svg>
+        </div>
+        <p class="hint" aria-hidden="true">scroll sideways →</p>
+        <div class="arch-info" id="archInfo" aria-live="polite" aria-atomic="true"><span class="k">Explore</span><b>Hover or tap any block</b><span class="d">Each part of the model explains what it does here.</span></div>
+        <figcaption><span>Multimodal hateful meme detection: ViT for the image, RoBERTa for the text plus a MoonDream caption, fused and classified.</span></figcaption>
+      </figure>
+      <div class="themes">
+        <article class="theme">
+          <span class="code">TEXT</span>
+          <h3>Cyberbullying detection</h3>
+          <p>Pretraining transformers on tokens fused with part-of-speech information, and applying them to automatic cyberbullying detection.</p>
+          <a class="rel" href="#pub-pos">Natural Language Processing Journal, 2025 ↓</a>
+        </article>
+        <article class="theme">
+          <span class="code">TEXT + IMAGE</span>
+          <h3>Hateful meme detection</h3>
+          <p>Memes mix words and pictures, so I compare language models, vision models and vision-language models on spotting hateful ones.</p>
+          <a class="rel" href="#pub-meme">Machine Learning and Knowledge Extraction, 2026 ↓</a>
+        </article>
+        <article class="theme">
+          <span class="code">XAI</span>
+          <h3>Explainable decisions</h3>
+          <p>Looking inside these models to show why they flag content as hateful, so their decisions can be checked by people.</p>
+          <a class="rel" href="#publications">Why So Meme? and Seems Like Hate ↓</a>
+        </article>
+      </div>
+      <p class="also">Also interested in <span>multimodal machine learning</span><span>natural language processing</span><span>human-computer interaction</span></p>
+    </div>
+  </section>
+
+  <section class="layer gut" id="publications">
+    <div class="wrap">
+      <div class="head"><span class="idx">layer_03</span><h2>Publications</h2><span class="pos">NNS · 5</span></div>
+      <article class="feature" id="pub-thesis">
+        <div>
+          <span class="kind">Doctoral dissertation · Kitami Institute of Technology</span>
+          <h3>Multifaceted Feature Fusion in Transformer Models With Application to Hateful Content Detection</h3>
+          <p>Nor Saiful Azam Bin Nor Azmi · Sep 2026</p>
+        </div>
+        <span class="yr" aria-hidden="true">2026</span>
+      </article>
+      <div class="cards">
+        <article class="card" id="pub-meme">
+          <div class="top"><span class="k">Journal</span><span>Feb 2026</span></div>
+          <h3>Why So Meme? A Comparative and Explainable Analysis of Multimodal Hateful Meme Detection</h3>
+          <p class="auth"><b>Nor Saiful Azam Bin Nor Azmi</b>, Michal Ptaszynski, Fumito Masui, Abu Nowhash Chowdhury</p>
+          <p class="venue">Machine Learning and Knowledge Extraction (MDPI)</p>
+          <a class="doi" href="https://doi.org/10.3390/make8020050" target="_blank" rel="noopener">doi:10.3390/make8020050 ↗</a>
+        </article>
+        <article class="card" id="pub-pos">
+          <div class="top"><span class="k">Journal</span><span>Feb 2025</span></div>
+          <h3>Token and Part-of-Speech Fusion for Pretraining of Transformers with Application in Automatic Cyberbullying Detection</h3>
+          <p class="auth"><b>Nor Saiful Azam Bin Nor Azmi</b>, Michal Ptaszynski, Fumito Masui, Juuso Eronen, Karol Nowakowski</p>
+          <p class="venue">Natural Language Processing Journal (Elsevier)</p>
+          <a class="doi" href="https://doi.org/10.1016/j.nlp.2025.100132" target="_blank" rel="noopener">doi:10.1016/j.nlp.2025.100132 ↗</a>
+        </article>
+        <article class="card talk" id="pub-seems">
+          <div class="top"><span class="k">Report</span><span>Hakodate · n.d.</span></div>
+          <h3>Seems Like Hate: An Explainable Comparison of Language Model, Vision Model and VLM on Hateful Memes</h3>
+          <p class="auth"><b>Nor Saiful Azam Bin Nor Azmi</b>, Michal Ptaszynski, Fumito Masui</p>
+          <p class="venue">言語獲得と理解研究会報告 (Report of the Research Group on Language Acquisition and Comprehension), Future University Hakodate · no date listed</p>
+        </article>
+        <article class="card talk" id="pub-edo">
+          <div class="top"><span class="k">Workshop</span><span>Apr 2023 · Poznań</span></div>
+          <h3>Token and Part-of-Speech Fusion for Pretraining of Transformers with Application in Automatic Cyberbullying Detection</h3>
+          <p class="auth"><b>Nor Saiful Azam Bin Nor Azmi</b>, Michal Ptaszynski, Juuso Eronen, Karol Nowakowski, Fumito Masui</p>
+          <p class="venue">EDO 2023 at the 10th Language &amp; Technology Conference, Poznań, Poland, pp. 201–205</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="layer gut" id="path">
+    <div class="wrap">
+      <div class="head"><span class="idx">layer_04</span><h2>Path</h2><span class="pos">NN · timeline</span></div>
+      <div class="path">
+        <div>
+          <h3 class="col">Experience</h3>
+          <ol class="steps">
+            <li class="now" id="job-researcher"><span class="when">Sep 2026 – present</span><h4>Researcher</h4><p>Kitami Institute of Technology · Contract</p></li>
+            <li id="job-ra"><span class="when">Oct 2023 – Sep 2026</span><h4>Research Assistant</h4><p>Kitami Institute of Technology · Part-time</p></li>
+            <li id="job-ta"><span class="when">Oct 2023 – Sep 2026</span><h4>Teaching Assistant</h4><p>Kitami Institute of Technology · Part-time</p></li>
+            <li id="job-intern"><span class="when">2019</span><h4>Software Support Engineer, Intern</h4><p>Dagang Net Technologies · Malaysia</p></li>
+          </ol>
+        </div>
+        <div>
+          <h3 class="col">Education</h3>
+          <ol class="steps">
+            <li id="edu-phd"><span class="when">Oct 2023 – Sep 2026</span><h4>Ph.D., Co-Creative Engineering</h4><p>Kitami Institute of Technology</p><p class="thesis">Multifaceted Feature Fusion in Transformer Models With Application to Hateful Content Detection</p></li>
+            <li id="edu-meng"><span class="when">Oct 2021 – Sep 2023</span><h4>M.Eng., Information and Communication Engineering</h4><p>Kitami Institute of Technology</p></li>
+            <li id="edu-bsc"><span class="when">Apr 2015 – Mar 2020</span><h4>Bachelor of Computer Science (Hons), Software Engineering</h4><p>Multimedia University, Malaysia</p></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="layer gut" id="beyond">
+    <div class="wrap">
+      <div class="head"><span class="idx">layer_05</span><h2>Off the clock</h2><span class="pos">VBG · hobbies</span></div>
+      <a class="teaser" href="personal.html">
+        <div>
+          <span class="kick">Personal page</span>
+          <h3>Guitar, cars, snowboarding<br>and Malaysian food.</h3>
+          <div class="hobbies"><span>guitar</span><span>drives</span><span>DIY upgrades</span><span>sim racing</span><span>snowboarding</span><span>cooking</span><span>YouTube</span><span>Twitch</span></div>
+        </div>
+        <span class="go" aria-hidden="true">→</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="layer gut" id="contact">
+    <div class="wrap">
+      <div class="head"><span class="idx">layer_06</span><h2>Contact</h2><span class="pos">VB · reach</span></div>
+      <div class="contact-grid">
+        <div>
+          <p class="big">Let's talk research.</p>
+          <p>I'm open to research roles and collaborations on multimodal NLP and content moderation.</p>
+          <ul class="langs" aria-label="Languages">
+            <li><b>English</b>professional</li>
+            <li><b>Japanese</b>limited working</li>
+          </ul>
+        </div>
+        <ul class="links">
+          <li><div class="ph"><span>Email</span><small>your-email@example.com (placeholder)</small></div></li>
+          <li><a href="https://scholar.google.com/citations?user=FKObmgIAAAAJ&amp;hl=en" target="_blank" rel="noopener"><span>Google Scholar</span><small>↗</small></a></li>
+          <li><a href="https://www.linkedin.com/in/nor-saiful-azam-nor-azmi/" target="_blank" rel="noopener"><span>LinkedIn</span><small>nor-saiful-azam-nor-azmi ↗</small></a></li>
+          <li><a href="https://www.researchgate.net/profile/Nor-Saiful-Azam-Bin-Nor-Azmi" target="_blank" rel="noopener"><span>ResearchGate</span><small>↗</small></a></li>
+          <li><a href="https://github.com/saiefulEZO" target="_blank" rel="noopener"><span>GitHub</span><small>saiefulEZO ↗</small></a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="gut">
+  <div class="wrap">
+    <span>© 2026 Nor Saiful Azam bin Nor Azmi</span>
+    <span>TiP Lab · 165 Koen-cho, Kitami, Hokkaido 090-8507</span>
+  </div>
+</footer>
+
+<dialog class="mapdlg" id="mapDlg" aria-labelledby="mapTitle" aria-describedby="mapIntro">
+  <div class="sheet">
+    <div class="dbar">
+      <span class="idx" aria-hidden="true">map_00</span><h2 id="mapTitle">Career map</h2><span class="pos">NN · 40 points</span>
+      <button type="button" class="dclose" id="mapClose" aria-label="Close the career map"><span aria-hidden="true">✕</span> close</button>
+    </div>
+    <div class="dbody" id="mapBody">
+      <p class="mintro" id="mapIntro">My career as an embedding space. Every point is one piece of it: a topic, paper, degree, job, model or hobby. Click a point, click a cluster name, or query the space.</p>
+
+      <form class="query" id="qform" role="search" autocomplete="off">
+        <label for="q">q =</label>
+        <input id="q" name="q" type="search" placeholder="query the space, e.g. memes, Japan, guitar" aria-describedby="qhelp" enterkeyhint="search">
+        <button type="submit">retrieve →</button>
+      </form>
+      <div class="qchips" id="qhelp"><span>try:</span>
+        <button type="button" data-q="hateful memes">hateful memes</button>
+        <button type="button" data-q="papers">papers</button>
+        <button type="button" data-q="education">education</button>
+        <button type="button" data-q="Japan">Japan</button>
+        <button type="button" data-q="Malaysia">Malaysia</button>
+        <button type="button" data-q="models">models</button>
+        <button type="button" data-q="guitar cars">guitar, cars</button>
+        <button type="button" data-q="contact">contact</button>
+      </div>
+
+      <figure class="fig1" id="fig1">
+        <div class="figbar">
+          <span><b>fig. 1</b> career space <span class="np">· 40 points </span>· 7 clusters</span>
+          <div class="vt" role="group" aria-label="View">
+            <button type="button" id="vMap" aria-pressed="true">map</button>
+            <button type="button" id="vList" aria-pressed="false">list</button>
+          </div>
+        </div>
+        <div class="fig1-grid">
+          <div class="plot" id="plot">
+            <svg id="space" role="group" aria-label="Career map. Each point is an item; arrow keys move between points, Enter opens one, Home returns to me, Escape closes."></svg>
+            <div class="hud" id="hud" aria-hidden="true">layout · step <b>0</b>/200</div>
+            <div class="ctl"><button type="button" id="rerun" title="Run the layout again" aria-label="Re-run the layout">↻<span class="bt"> re-run</span></button><button type="button" id="reset" title="Reset the view" aria-label="Reset view">⌂<span class="bt"> reset view</span></button></div>
+            <div class="mlegend" id="legend" role="group" aria-label="Clusters"></div>
+          </div>
+          <div class="maplist" id="maplist" role="region" aria-label="Career map as a list"></div>
+          <aside class="panel" id="panel" aria-label="Details"></aside>
+        </div>
+        <figcaption class="mcap"><b>Map.</b> Points are placed by hand, grouped by theme and joined to related items; they are not output by a real model. The opening animation lays them out from a scatter, and its Δ is the real average distance still to travel. Query results are ranked by keyword similarity.</figcaption>
+      </figure>
+    </div>
+  </div>
+  <p class="msr" id="mapLive" aria-live="polite"></p>
+</dialog>
+
+
+<script>
+(function () {
+  var h = document.getElementById('name');
+  if (!h) return;
+  var line = h.querySelector('.line');
+  function fit() {
+    h.style.fontSize = '';
+    var base = parseFloat(getComputedStyle(h).fontSize);
+    var need = line.getBoundingClientRect().width, avail = h.clientWidth;
+    if (!need || !avail) return;
+    h.style.fontSize = Math.min(base * avail / need * 0.985, 76) + 'px';
+  }
+  fit();
+  window.addEventListener('resize', fit);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+})();
+</script>
+<script>
+(function () {
+  var c = document.getElementById('field');
+  if (!c || !c.getContext) return;
+  var ctx = c.getContext('2d');
+  var mqR = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
+  var reduce = !!(mqR && mqR.matches), root = document.documentElement;
+  var pts = [], W = 0, H = 0, dpr = Math.min(window.devicePixelRatio || 1, 2), raf = null, mouse = { cx: 0, cy: 0, on: false };
+  /* the falling nodes reach for the pointer (Save Point 2): nearby nodes draw a line to it */
+  var hero = c.parentElement;
+  hero.addEventListener('pointermove', function (e) { mouse.cx = e.clientX; mouse.cy = e.clientY; mouse.on = true; if (!raf) draw(); }, { passive: true });
+  hero.addEventListener('pointerleave', function () { mouse.on = false; if (!raf) draw(); });
+  /* scrolling under a still pointer moves the hero: redraw so the lines follow when the loop is paused */
+  window.addEventListener('scroll', function () { if (mouse.on && !raf) draw(); }, { passive: true });
+  function css(name, fb) { var v = getComputedStyle(root).getPropertyValue(name).trim(); return v || fb; }
+  var ice = css('--ice', '#6cc8ff'), heat = css('--heat', '#ffb547');
+  function size() {
+    var w = hero.clientWidth, h = hero.clientHeight;
+    if (!w || !h || (w === W && h === H)) return;
+    var n = Math.round(Math.min(90, Math.max(24, (w * h) / 14000)));
+    /* keep the nodes already falling, stretched to the new size; add or drop a few to keep the density */
+    if (pts.length && W && H) pts.forEach(function (p) { p.x *= w / W; p.y *= h / H; });
+    W = w; H = h;
+    c.width = Math.round(W * dpr); c.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    while (pts.length > n) pts.pop();
+    while (pts.length < n) pts.push({ x: Math.random() * W, y: Math.random() * H, r: Math.random() * 1.6 + 0.5, vy: Math.random() * 0.35 + 0.12, vx: (Math.random() - 0.5) * 0.18, hot: Math.random() < 0.12 });
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    var max = 120;
+    ctx.lineWidth = 0.7;
+    for (var i = 0; i < pts.length; i++) {
+      var a = pts[i];
+      for (var j = i + 1; j < pts.length; j++) {
+        var b = pts[j], dx = a.x - b.x, dy = a.y - b.y, d = Math.sqrt(dx * dx + dy * dy);
+        if (d < max) {
+          ctx.globalAlpha = (1 - d / max) * 0.35;
+          ctx.strokeStyle = (a.hot || b.hot) ? heat : ice;
+          ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+        }
+      }
+    }
+    if (mouse.on) {
+      var hr = hero.getBoundingClientRect(), mxp = mouse.cx - hr.left, myp = mouse.cy - hr.top;
+      for (var m = 0; m < pts.length; m++) {
+        var q = pts[m], mx = q.x - mxp, my = q.y - myp, md = Math.sqrt(mx * mx + my * my);
+        if (md < 180) {
+          ctx.globalAlpha = (1 - md / 180) * 0.75;
+          ctx.strokeStyle = heat; ctx.lineWidth = 1;
+          ctx.beginPath(); ctx.moveTo(q.x, q.y); ctx.lineTo(mxp, myp); ctx.stroke();
+        }
+      }
+      ctx.globalAlpha = 0.9; ctx.fillStyle = heat;
+      ctx.beginPath(); ctx.arc(mxp, myp, 3, 0, Math.PI * 2); ctx.fill();
+      ctx.lineWidth = 0.7;
+    }
+    for (var k = 0; k < pts.length; k++) {
+      var p = pts[k];
+      ctx.globalAlpha = p.hot ? 0.95 : 0.7;
+      ctx.fillStyle = p.hot ? heat : ice;
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.hot ? p.r + 0.8 : p.r, 0, Math.PI * 2); ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+  }
+  var seen = true;
+  /* the loop runs only while the hero is on screen, the tab is visible, motion is allowed and the career map is closed */
+  function live() { return !reduce && seen && !document.hidden && !root.classList.contains('dlg-open'); }
+  function step() {
+    if (!live()) { raf = null; return; }
+    for (var i = 0; i < pts.length; i++) {
+      var p = pts[i]; p.y += p.vy; p.x += p.vx;
+      if (p.y > H + 4) { p.y = -4; p.x = Math.random() * W; }
+      if (p.x < -4) p.x = W + 4;
+      if (p.x > W + 4) p.x = -4;
+    }
+    draw();
+    raf = requestAnimationFrame(step);
+  }
+  function resume() { if (!raf && live()) raf = requestAnimationFrame(step); }
+  function pause() { if (raf) { cancelAnimationFrame(raf); raf = null; } }
+  size(); draw(); resume();
+  if ('IntersectionObserver' in window) new IntersectionObserver(function (es) {
+    seen = es[0].isIntersecting;
+    if (!seen) pause(); else resume();
+  }).observe(hero);
+  /* the hero changes size with the window and once the web fonts are in */
+  var t; function refit() { clearTimeout(t); t = setTimeout(function () { size(); draw(); }, 150); }
+  if ('ResizeObserver' in window) new ResizeObserver(refit).observe(hero); else window.addEventListener('resize', refit);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(refit);
+  window.addEventListener('mapclosed', resume);
+  if (mqR) { var onR = function () { reduce = mqR.matches; if (reduce) { pause(); draw(); } else resume(); }; if (mqR.addEventListener) mqR.addEventListener('change', onR); else if (mqR.addListener) mqR.addListener(onR); }
+  var upd = function () { ice = css('--ice', ice); heat = css('--heat', heat); draw(); };
+  if (window.matchMedia) {
+    var mq = window.matchMedia('(prefers-color-scheme: dark)');
+    if (mq.addEventListener) mq.addEventListener('change', upd);
+  }
+  if (window.MutationObserver) new MutationObserver(upd).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+  document.addEventListener('visibilitychange', function () { if (document.hidden) pause(); else resume(); });
+})();
+</script>
+<script>
+/* Layer_02: hover, focus or tap a block of the architecture and the box below says what it does (Save Point 2) */
+(function () {
+  var INFO = {
+    meme: { k: 'Input', t: 'Meme image', d: "The picture itself. A meme's meaning often depends on the image and the words on it together." },
+    moon: { k: 'Captioning', t: 'MoonDream', d: 'A small vision-language model that writes a caption describing the image. The caption joins the text stream, so the language model also learns what the picture shows.' },
+    text: { k: 'Input', t: 'Meme text', d: 'The words written on the meme, read as plain text.' },
+    vit: { k: 'Visual encoder', t: 'Vision Transformer (ViT)', d: 'Cuts the image into patches, embeds them and runs them through transformer encoder layers. The [CLS] token sums up the whole image as a 768-dimensional vector.' },
+    rob: { k: 'Text encoder', t: 'RoBERTa', d: 'Tokenizes the meme text plus the generated caption, encodes it with transformer layers, and the pooler turns it into a 768-dimensional vector.' },
+    fuse: { k: 'Fusion', t: 'Concatenation', d: 'The visual and textual vectors are joined into one 1536-dimensional vector, so the classifier sees both modalities at once.' },
+    head: { k: 'Classifier', t: 'Classifier head', d: 'A dense layer (1536×512, ReLU), dropout of 0.1 and a linear layer (512×2) turn the fused vector into two scores.' },
+    out: { k: 'Output', t: 'Prediction', d: 'A softmax turns the two scores into probabilities: hateful or non-hateful.' }
+  };
+  var box = document.getElementById('archInfo');
+  var hs = [].slice.call(document.querySelectorAll('.hs'));
+  if (!box || !hs.length) return;
+  var cur = null;
+  function show(el) {
+    var key = el.getAttribute('data-k'), d = INFO[key]; if (!d || key === cur) return;
+    cur = key;
+    hs.forEach(function (h) { h.classList.toggle('on', h === el); });
+    box.innerHTML = '<span class="k"></span><b></b><span class="d"></span>';
+    box.querySelector('.k').textContent = d.k; box.querySelector('b').textContent = d.t; box.querySelector('.d').textContent = d.d;
+  }
+  /* the box keeps the height of its longest text, so the page below does not jump while hovering */
+  function fitBox() {
+    var keep = box.innerHTML; box.style.minHeight = '';
+    var tallest = box.offsetHeight;
+    Object.keys(INFO).forEach(function (k) {
+      var d = INFO[k];
+      box.innerHTML = '<span class="k"></span><b></b><span class="d"></span>';
+      box.querySelector('.k').textContent = d.k; box.querySelector('b').textContent = d.t; box.querySelector('.d').textContent = d.d;
+      tallest = Math.max(tallest, box.offsetHeight);
+    });
+    box.innerHTML = keep; box.style.minHeight = tallest + 'px';
+  }
+  fitBox();
+  var ft; window.addEventListener('resize', function () { clearTimeout(ft); ft = setTimeout(fitBox, 150); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitBox);
+  /* after a tap, make sure the explanation is on screen */
+  function reveal() {
+    var r = box.getBoundingClientRect();
+    if (r.bottom > innerHeight) box.scrollIntoView({ block: 'nearest', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+  }
+  hs.forEach(function (h) {
+    h.addEventListener('mouseenter', function () { show(h); });
+    h.addEventListener('focus', function () {
+      show(h);
+      /* keyboard focus on a block that is scrolled out of the sideways strip brings it into view */
+      var fv = false; try { fv = h.matches(':focus-visible'); } catch (e) {}
+      if (fv) h.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+    });
+    h.addEventListener('click', function () { show(h); reveal(); });
+    h.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(h); reveal(); } });
+  });
+})();
+</script>
+<script>
+(function () {
+  'use strict';
+  /* reduced motion: read once, then follow the system setting while the page is open */
+  var mqR = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null, reduce = !!(mqR && mqR.matches);
+  var live = document.getElementById('mapLive');
+  function say(t) { if (!live) return; live.textContent = ''; setTimeout(function () { live.textContent = t; }, 30); }
+  function store(k, v) { try { if (v === null) localStorage.removeItem(k); else localStorage.setItem(k, v); } catch (e) {} }
+  function load(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+
+  /* ================= career map popup (save_centerpiece, v4 QA, Save Point 1 look); the CV opens it from Layer_01 ================= */
+  var MAP = (function () {
+    var CL = {
+      research: { name: 'Research topics', lx: -0.95, ly: -0.98, a: 'start' },
+      models:   { name: 'Models & methods', lx: -0.2, ly: -1.0, a: 'start' },
+      pubs:     { name: 'Publications', lx: 0.96, ly: -1.0, a: 'end' },
+      edu:      { name: 'Education', lx: 0.99, ly: 0.21, a: 'end' },
+      work:     { name: 'Experience', lx: 0.16, ly: -0.2, a: 'start' },
+      life:     { name: 'Off the clock', lx: -0.95, ly: -0.02, a: 'start' },
+      me:       { name: 'Me & links', lx: -0.26, ly: 0.98, a: 'start' }
+    };
+    var N = [{"id": "nlp", "c": "research", "x": -0.88, "y": -0.62, "r": 6, "label": "NLP", "title": "Natural language processing", "meta": "Research interest", "body": "Teaching machines to read. It is the base of most of my work, from cyberbullying detection to the text inside memes.", "links": [], "tags": ["nlp", "language", "text", "research", "topics"]}, {"id": "hci", "c": "research", "x": -0.72, "y": -0.84, "r": 6, "label": "HCI", "title": "Human-computer interaction", "meta": "Research interest", "body": "How people and AI systems work with each other.", "links": [], "tags": ["hci", "human", "interaction", "research", "topics"]}, {"id": "mm", "c": "research", "x": -0.5, "y": -0.7, "r": 6, "label": "Multimodal ML", "title": "Multimodal machine learning", "meta": "Research interest", "body": "Models that combine more than one kind of input, such as text and images, into a single prediction.", "links": [], "tags": ["multimodal", "image", "images", "vision", "text", "research", "topics", "memes"]}, {"id": "hate", "c": "research", "x": -0.58, "y": -0.38, "r": 9, "label": "Hateful memes", "title": "Hateful meme detection", "meta": "Main research topic", "body": "Detecting hateful content in memes, where the meaning comes from the picture and its words together.", "links": [["In publications", "#pub-meme"], ["See the model", "#fig-arch"]], "tags": ["hate", "hateful", "memes", "meme", "multimodal", "safety", "moderation", "research", "topics"]}, {"id": "cyber", "c": "research", "x": -0.86, "y": -0.3, "r": 6, "label": "Cyberbullying", "title": "Cyberbullying detection", "meta": "Research topic", "body": "Detecting cyberbullying in text. This is the focus of my token and part-of-speech fusion work.", "links": [["In publications", "#pub-pos"]], "tags": ["cyberbullying", "bullying", "text", "safety", "moderation", "nlp", "research", "topics"]}, {"id": "xai", "c": "research", "x": -0.42, "y": -0.14, "r": 6, "label": "Explainable AI", "title": "Explainable AI", "meta": "Research topic", "body": "Showing why a model flags a meme as hateful, so people can check its decisions.", "links": [["In publications", "#pub-meme"]], "tags": ["explainable", "explanation", "xai", "interpretability", "research", "topics"]}, {"id": "fusion", "c": "research", "x": -0.22, "y": -0.42, "r": 6, "label": "Feature fusion", "title": "Feature fusion in transformers", "meta": "The thread through my work", "body": "Combining different features inside transformer models: tokens with part-of-speech tags, or text with images. It is the subject of my Ph.D. thesis.", "links": [["My thesis", "#pub-thesis"]], "tags": ["fusion", "transformers", "thesis", "features", "research", "topics"]}, {"id": "moondream", "c": "models", "x": -0.12, "y": -0.86, "r": 6, "label": "MoonDream", "title": "MoonDream", "meta": "Vision-language model · image captioning", "body": "A small vision-language model that writes a caption for each meme image, so the text model also learns what the picture shows.", "links": [["See the model", "#fig-arch"]], "tags": ["moondream", "vlm", "caption", "models", "vision", "methods"]}, {"id": "vit", "c": "models", "x": 0.0, "y": -0.66, "r": 6, "label": "ViT", "title": "Vision Transformer (ViT)", "meta": "Visual encoder", "body": "Encodes the meme image into a feature vector in my multimodal model.", "links": [["See the model", "#fig-arch"]], "tags": ["vit", "vision", "image", "transformer", "transformers", "models", "methods"]}, {"id": "vlm", "c": "models", "x": -0.22, "y": -0.6, "r": 6, "label": "VLMs", "title": "Vision-language models", "meta": "Model family", "body": "Models that read images and text together. I compare them with language-only and vision-only models in Seems Like Hate.", "links": [["In publications", "#pub-seems"]], "tags": ["vlm", "vision", "language", "models", "multimodal", "methods"]}, {"id": "roberta", "c": "models", "x": 0.18, "y": -0.8, "r": 6, "label": "RoBERTa", "title": "RoBERTa", "meta": "Text encoder", "body": "Encodes the meme text plus the MoonDream caption in my multimodal model.", "links": [["See the model", "#fig-arch"]], "tags": ["roberta", "text", "transformer", "transformers", "models", "nlp", "methods"]}, {"id": "transformers", "c": "models", "x": 0.12, "y": -0.5, "r": 6, "label": "Transformers", "title": "Transformer models", "meta": "Architecture", "body": "The architecture behind almost all of my models, for text, for images and for both.", "links": [], "tags": ["transformers", "transformer", "models", "architecture", "methods"]}, {"id": "thesis", "c": "pubs", "x": 0.48, "y": -0.42, "r": 9, "label": "Ph.D. thesis", "title": "Multifaceted Feature Fusion in Transformer Models With Application to Hateful Content Detection", "meta": "Doctoral dissertation · Kitami Institute of Technology · Sep 2026", "body": "My doctoral thesis on fusing different kinds of features inside transformer models to detect hateful content.", "links": [["My thesis", "#pub-thesis"]], "tags": ["thesis", "papers", "paper", "publications", "fusion", "hateful", "phd", "dissertation"]}, {"id": "meme", "c": "pubs", "x": 0.42, "y": -0.84, "r": 6, "label": "Why So Meme?", "title": "Why So Meme? A Comparative and Explainable Analysis of Multimodal Hateful Meme Detection", "meta": "Journal · Machine Learning and Knowledge Extraction (MDPI) · Feb 2026", "body": "With Michal Ptaszynski, Fumito Masui and Abu Nowhash Chowdhury.", "links": [["DOI", "https://doi.org/10.3390/make8020050"], ["In publications", "#pub-meme"]], "tags": ["memes", "meme", "hateful", "papers", "paper", "journal", "explainable", "multimodal", "publications"]}, {"id": "pos", "c": "pubs", "x": 0.72, "y": -0.58, "r": 6, "label": "Token + POS fusion", "title": "Token and Part-of-Speech Fusion for Pretraining of Transformers with Application in Automatic Cyberbullying Detection", "meta": "Journal · Natural Language Processing Journal (Elsevier) · Feb 2025", "body": "With Michal Ptaszynski, Fumito Masui, Juuso Eronen and Karol Nowakowski.", "links": [["DOI", "https://doi.org/10.1016/j.nlp.2025.100132"], ["In publications", "#pub-pos"]], "tags": ["cyberbullying", "pos", "papers", "paper", "journal", "fusion", "transformers", "publications"]}, {"id": "seems", "c": "pubs", "x": 0.9, "y": -0.74, "r": 6, "label": "Seems Like Hate", "title": "Seems Like Hate: An Explainable Comparison of Language Model, Vision Model and VLM on Hateful Memes", "meta": "Report · 言語獲得と理解研究会 (Research Group on Language Acquisition and Comprehension) · Future University Hakodate · no date listed", "body": "With Michal Ptaszynski and Fumito Masui.", "links": [["In publications", "#pub-seems"]], "tags": ["talk", "memes", "hateful", "vlm", "explainable", "papers", "japan", "hakodate", "publications", "report"]}, {"id": "edo", "c": "pubs", "x": 0.92, "y": -0.28, "r": 6, "label": "EDO 2023", "title": "Token and Part-of-Speech Fusion for Pretraining of Transformers with Application in Automatic Cyberbullying Detection", "meta": "Workshop · EDO 2023 at the 10th Language & Technology Conference · Poznań, Poland · Apr 2023 · pp. 201–205", "body": "With Michal Ptaszynski, Juuso Eronen, Karol Nowakowski and Fumito Masui. Presented under the same title as the later journal article.", "links": [["In publications", "#pub-edo"]], "tags": ["workshop", "cyberbullying", "papers", "paper", "poland", "conference", "publications"]}, {"id": "phd", "c": "edu", "x": 0.62, "y": -0.08, "r": 6, "label": "Ph.D.", "title": "Ph.D., Co-Creative Engineering", "meta": "Kitami Institute of Technology · Oct 2023 – Sep 2026", "body": "Doctoral research in the TiP Lab under Prof. Michal Ptaszynski, ending in my thesis on feature fusion in transformers.", "links": [["In my timeline", "#edu-phd"]], "tags": ["education", "phd", "degree", "kitami", "japan", "hokkaido", "university"]}, {"id": "meng", "c": "edu", "x": 0.82, "y": 0.1, "r": 6, "label": "M.Eng.", "title": "M.Eng., Information and Communication Engineering", "meta": "Kitami Institute of Technology · Oct 2021 – Sep 2023", "body": "My master's degree, and my first step into research in Hokkaido.", "links": [["In my timeline", "#edu-meng"]], "tags": ["education", "master", "degree", "kitami", "japan", "hokkaido", "university"]}, {"id": "bsc", "c": "edu", "x": 0.92, "y": 0.32, "r": 6, "label": "B.CS", "title": "Bachelor of Computer Science (Hons), Software Engineering", "meta": "Multimedia University, Malaysia · Apr 2015 – Mar 2020", "body": "My undergraduate degree in computer science, specialising in software engineering.", "links": [["In my timeline", "#edu-bsc"]], "tags": ["education", "degree", "bachelor", "malaysia", "mmu", "software", "university", "bachelor", "computer", "science", "bcs"]}, {"id": "researcher", "c": "work", "x": 0.3, "y": 0.04, "r": 6, "label": "Researcher", "title": "Researcher", "meta": "Kitami Institute of Technology · Contract · Sep 2026 – now", "body": "My current role: research on multimodal content analysis and AI-driven content moderation.", "links": [["In my timeline", "#job-researcher"]], "tags": ["work", "job", "researcher", "kitami", "japan", "experience", "current", "now"]}, {"id": "ra", "c": "work", "x": 0.34, "y": 0.26, "r": 6, "label": "Research Assistant", "title": "Research Assistant", "meta": "Kitami Institute of Technology · Part-time · Oct 2023 – Sep 2026", "body": "Research assistant alongside my Ph.D.", "links": [["In my timeline", "#job-ra"]], "tags": ["work", "job", "experience", "kitami", "japan", "research", "ra"]}, {"id": "ta", "c": "work", "x": 0.5, "y": 0.42, "r": 6, "label": "Teaching Assistant", "title": "Teaching Assistant", "meta": "Kitami Institute of Technology · Part-time · Oct 2023 – Sep 2026", "body": "Teaching assistant alongside my Ph.D.", "links": [["In my timeline", "#job-ta"]], "tags": ["work", "job", "experience", "teaching", "kitami", "japan", "ta"]}, {"id": "intern", "c": "work", "x": 0.76, "y": 0.6, "r": 6, "label": "Internship", "title": "Software Support Engineer (intern)", "meta": "Dagang Net Technologies, Malaysia · 2019", "body": "Industry internship during my computer science degree.", "links": [["In my timeline", "#job-intern"]], "tags": ["work", "job", "experience", "internship", "malaysia", "software", "industry"]}, {"id": "me", "c": "me", "x": 0.0, "y": 0.0, "r": 24, "label": "Me", "title": "Nor Saiful Azam bin Nor Azmi", "meta": "Researcher · Kitami Institute of Technology", "body": "I'm an AI researcher working on how machines understand language and images, and how that understanding can help make online spaces safer.", "links": [["About me", "#about"], ["Contact", "#contact"]], "tags": ["me", "about", "saiful", "researcher", "who"]}, {"id": "kitami", "c": "me", "x": 0.04, "y": 0.34, "r": 6, "label": "Kitami, Hokkaido", "title": "Kitami, Hokkaido, Japan", "meta": "Where I work", "body": "Home of the Kitami Institute of Technology and the TiP Lab, where I did my M.Eng. and Ph.D. and now work as a researcher.", "links": [["TiP Lab", "https://kit-tiplab.github.io/"]], "tags": ["japan", "hokkaido", "kitami", "location", "lab", "tip"]}, {"id": "ja", "c": "me", "x": 0.18, "y": 0.5, "r": 6, "label": "Japanese", "title": "Japanese", "meta": "Limited working proficiency", "body": "", "links": [], "tags": ["language", "languages", "japanese", "japan"]}, {"id": "en", "c": "me", "x": 0.0, "y": 0.62, "r": 6, "label": "English", "title": "English", "meta": "Professional working proficiency", "body": "", "links": [], "tags": ["language", "languages", "english"]}, {"id": "malaysia", "c": "me", "x": -0.18, "y": 0.46, "r": 6, "label": "Malaysia", "title": "Malaysia", "meta": "Where I studied computer science", "body": "I did my bachelor's degree at Multimedia University and interned at Dagang Net Technologies there. Malaysian food is also what I cook.", "links": [], "tags": ["malaysia", "mmu", "education", "food"]}, {"id": "linkedin", "c": "me", "x": 0.08, "y": 0.86, "r": 6, "label": "LinkedIn", "title": "LinkedIn", "meta": "nor-saiful-azam-nor-azmi", "body": "", "links": [["Open LinkedIn", "https://www.linkedin.com/in/nor-saiful-azam-nor-azmi/"]], "tags": ["contact", "links", "linkedin", "profile", "social"]}, {"id": "scholar", "c": "me", "x": 0.3, "y": 0.74, "r": 6, "label": "Google Scholar", "title": "Google Scholar", "meta": "Publication profile", "body": "", "links": [["Open Scholar", "https://scholar.google.com/citations?user=FKObmgIAAAAJ&hl=en"]], "tags": ["contact", "links", "scholar", "papers", "citations", "profile"]}, {"id": "github", "c": "me", "x": 0.48, "y": 0.9, "r": 6, "label": "GitHub", "title": "GitHub", "meta": "saiefulEZO", "body": "", "links": [["Open GitHub", "https://github.com/saiefulEZO"]], "tags": ["contact", "links", "github", "code", "profile"]}, {"id": "researchgate", "c": "me", "x": 0.9, "y": 0.8, "r": 6, "label": "ResearchGate", "title": "ResearchGate", "meta": "Publication profile", "body": "", "links": [["Open ResearchGate", "https://www.researchgate.net/profile/Nor-Saiful-Azam-Bin-Nor-Azmi"]], "tags": ["contact", "links", "researchgate", "papers", "profile"]}, {"id": "guitar", "c": "life", "x": -0.5, "y": 0.22, "r": 6, "label": "Guitar", "title": "Guitar", "meta": "Hobby", "body": "Playing guitar is one of my favourite ways to unwind.", "links": [["Off the clock", "personal.html"]], "tags": ["guitar", "music", "hobby", "hobbies", "fun", "personal"]}, {"id": "youtube", "c": "life", "x": -0.85, "y": 0.1, "r": 6, "label": "YouTube", "title": "YouTube · @saiefulEZO", "meta": "Channel", "body": "“I post things for fun~ Its a memory throughout my journey of LIFE. :D”", "links": [["Open YouTube", "https://www.youtube.com/@saiefulEZO"]], "tags": ["youtube", "video", "videos", "channel", "hobby", "fun", "personal", "social"]}, {"id": "twitch", "c": "life", "x": -0.9, "y": 0.42, "r": 6, "label": "Twitch", "title": "Twitch · saiefulezo", "meta": "Channel", "body": "“Play for fun. No stress. Hope you enjoy!”", "links": [["Open Twitch", "https://www.twitch.tv/saiefulezo"]], "tags": ["twitch", "stream", "streaming", "games", "gaming", "channel", "hobby", "fun", "personal"]}, {"id": "cars", "c": "life", "x": -0.68, "y": 0.6, "r": 6, "label": "Car culture", "title": "Car culture", "meta": "Hobby", "body": "I love cars from every angle: going for drives and doing DIY upgrades myself.", "links": [["Off the clock", "personal.html"]], "tags": ["cars", "car", "driving", "diy", "hobby", "hobbies", "fun", "personal", "circuit", "circuits", "track", "sepang", "suzuka"]}, {"id": "sim", "c": "life", "x": -0.82, "y": 0.8, "r": 6, "label": "Sim racing", "title": "Sim racing", "meta": "Hobby", "body": "Another side of my love for cars: racing on a simulator.", "links": [["Off the clock", "personal.html"]], "tags": ["sim", "racing", "cars", "games", "gaming", "hobby", "hobbies", "fun", "personal", "circuit", "circuits", "track", "sepang", "suzuka"]}, {"id": "cooking", "c": "life", "x": -0.4, "y": 0.72, "r": 6, "label": "Malaysian cooking", "title": "Malaysian cooking", "meta": "Hobby", "body": "I like cooking traditional Malaysian food, here in Hokkaido.", "links": [["Off the clock", "personal.html"]], "tags": ["cooking", "food", "malaysia", "malaysian", "hobby", "hobbies", "fun", "personal"]}, {"id": "snow", "c": "life", "x": -0.63, "y": 0.37, "r": 6, "label": "Snowboarding", "title": "Snowboarding", "meta": "Hobby", "body": "Winter in Hokkaido means snow, and I like to go snowboarding.", "tags": ["snowboarding", "snowboard", "snow", "winter", "hokkaido", "hobby", "hobbies", "fun", "personal"], "links": [["Off the clock", "personal.html"]]}];
+    var E = [["hate", "mm"], ["hate", "xai"], ["hate", "meme"], ["hate", "seems"], ["hate", "vlm"], ["cyber", "nlp"], ["cyber", "pos"], ["cyber", "edo"], ["fusion", "pos"], ["fusion", "thesis"], ["fusion", "mm"], ["xai", "meme"], ["xai", "seems"], ["nlp", "roberta"], ["nlp", "hci"], ["mm", "vit"], ["mm", "moondream"], ["vit", "meme"], ["roberta", "meme"], ["moondream", "meme"], ["transformers", "pos"], ["transformers", "vit"], ["transformers", "roberta"], ["vlm", "seems"], ["vlm", "moondream"], ["thesis", "phd"], ["phd", "ra"], ["phd", "ta"], ["phd", "kitami"], ["meng", "phd"], ["bsc", "meng"], ["bsc", "malaysia"], ["intern", "malaysia"], ["intern", "bsc"], ["researcher", "kitami"], ["me", "researcher"], ["me", "hate"], ["me", "guitar"], ["me", "kitami"], ["me", "en"], ["sim", "cars"], ["cooking", "malaysia"], ["ja", "kitami"], ["scholar", "meme"], ["github", "me"], ["linkedin", "me"], ["researchgate", "pos"], ["scholar", "me"], ["youtube", "twitch"], ["me", "youtube"], ["snow", "kitami"], ["snow", "me"]];
+    var api = { pending: null };
+    var byId = {}; N.forEach(function (n) { byId[n.id] = n; n.nb = []; });
+    E.forEach(function (e) { if (byId[e[0]] && byId[e[1]]) { byId[e[0]].nb.push(e[1]); byId[e[1]].nb.push(e[0]); } });
+    var svg = document.getElementById('space'), plot = document.getElementById('plot'), panel = document.getElementById('panel'), listEl = document.getElementById('maplist');
+    var fig = document.getElementById('fig1'), vMap = document.getElementById('vMap'), vList = document.getElementById('vList');
+    var NS = 'http://www.w3.org/2000/svg', built = false, isOpen = false, listView = false;
+    function el(tag, attrs, parent) { var x = document.createElementNS(NS, tag); for (var k in attrs) x.setAttribute(k, attrs[k]); if (parent) parent.appendChild(x); return x; }
+    function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+    var gE, gQ, gC, gN, qmark, axX, axY;
+    var W = 0, H = 0, S = { x: 1, y: 1 }, mobile = false;
+    var cam = { x: 0, y: 0, k: 1 }, camT = { x: 0, y: 0, k: 1 };
+    var state = { sel: null, c: null, q: null, guide: true }, rove = 'me', lastAct = 0;
+    var STEPS = 200, t0 = null, trainMs = reduce ? 0 : 2600;
+    var raf = null, visible = false, dT = 0, prevNow = 0, wasSettled = false;
+    var hud = document.getElementById('hud'), ctl = document.querySelector('#plot .ctl');
+
+    function build() {
+      built = true;
+      var defs = el('defs', {}, svg);
+      var cp = el('clipPath', { id: 'meclip' }, defs); el('circle', { r: 23, cx: 0, cy: 0 }, cp);
+      axX = el('text', { 'class': 'ax', 'text-anchor': 'end', 'aria-hidden': 'true' }, svg); axX.textContent = 'dim₁ →';
+      axY = el('text', { 'class': 'ax', 'aria-hidden': 'true' }, svg); axY.textContent = 'dim₂ →';
+      gE = el('g', {}, svg); gQ = el('g', {}, svg); gC = el('g', {}, svg); gN = el('g', {}, svg);
+      qmark = el('g', { 'class': 'qmark', 'aria-hidden': 'true' }, svg); el('path', { d: 'M0,-10 L10,0 L0,10 L-10,0 Z' }, qmark); var qt = el('text', { x: 14, y: 4 }, qmark); qt.textContent = 'q'; qmark.style.display = 'none';
+      E.forEach(function (e) { e.el = el('line', { 'class': 'edge' }, gE); });
+      Object.keys(CL).forEach(function (k) {
+        var c = CL[k], g = el('g', { 'class': 'clab c-' + k, tabindex: -1, role: 'button', 'aria-label': 'Cluster: ' + c.name }, gC);
+        var t = el('text', { 'text-anchor': c.a }, g); t.textContent = c.name; c.el = g; c.t = t;
+        g.addEventListener('click', function () { selectCluster(k); });
+        g.addEventListener('keydown', function (ev) { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); selectCluster(k); } });
+      });
+      N.forEach(function (n) {
+        var g = el('g', { 'class': 'node c-' + n.c, tabindex: n.id === rove ? 0 : -1, role: 'button', 'aria-label': n.title + ' (' + CL[n.c].name + ')' }, gN);
+        if (n.id === 'me') {
+          el('circle', { 'class': 'hit', r: 34 }, g);
+          el('circle', { 'class': 'me-ring2', r: 31 }, g);
+          el('image', { href: 'photo.jpg', x: -23, y: -23, width: 46, height: 46, 'clip-path': 'url(#meclip)', preserveAspectRatio: 'xMidYMin slice' }, g);
+          el('circle', { 'class': 'me-ring', r: 24 }, g);
+          n.lab = el('text', { 'class': 'lbl', x: 0, y: 46, 'text-anchor': 'middle' }, g);
+        } else {
+          el('circle', { 'class': 'hit', r: n.r + 10 }, g);
+          el('circle', { 'class': 'ring', r: n.r + 5 }, g);
+          el('circle', { 'class': 'dot', r: n.r }, g);
+          var left = n.x > 0.6;
+          n.lab = el('text', { 'class': 'lbl', x: left ? -(n.r + 7) : (n.r + 7), y: 4.5, 'text-anchor': left ? 'end' : 'start' }, g);
+        }
+        n.lab.textContent = n.label; n.g = g;
+        g.addEventListener('click', function () { select(n.id, true); });
+        g.addEventListener('keydown', function (ev) {
+          if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); select(n.id, true); return; }
+          var to = step(n, ev.key); if (to) { ev.preventDefault(); focusNode(to); }
+        });
+        g.addEventListener('focus', function () { setRove(n.id); });
+        g.addEventListener('mouseenter', function () { hoverEdges(n.id, true); });
+        g.addEventListener('mouseleave', function () { hoverEdges(n.id, false); });
+        g.addEventListener('focus', function () { hoverEdges(n.id, true); });
+        g.addEventListener('blur', function () { hoverEdges(n.id, false); });
+      });
+      var leg = document.getElementById('legend');
+      Object.keys(CL).forEach(function (k) {
+        var b = document.createElement('button'); b.type = 'button'; b.className = 'c-' + k; b.innerHTML = '<i></i>'; b.appendChild(document.createTextNode(CL[k].name));
+        b.addEventListener('click', function () { selectCluster(k); }); leg.appendChild(b);
+      });
+      /* list view: the same space as an accessible list */
+      var html = '';
+      Object.keys(CL).forEach(function (k) {
+        html += '<h3 class="c-' + k + '">' + esc(CL[k].name) + '</h3><ul>' + N.filter(function (n) { return n.c === k; }).map(function (n) {
+          return '<li><button type="button" data-go="' + n.id + '">' + esc(n.title) + '<span>' + n.nb.length + (n.nb.length === 1 ? ' link' : ' links') + '</span></button></li>'; }).join('') + '</ul>';
+      });
+      listEl.innerHTML = html;
+      [].forEach.call(listEl.querySelectorAll('[data-go]'), function (b) { b.addEventListener('click', function () { select(b.getAttribute('data-go'), true); }); });
+      if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { visible = es[0].isIntersecting; if (visible) kick(); }, { threshold: 0.2 }).observe(plot);
+      else visible = true;
+      document.getElementById('qform').addEventListener('submit', function (e) { e.preventDefault(); runQuery(document.getElementById('q').value); });
+      [].forEach.call(document.querySelectorAll('#qhelp [data-q]'), function (b) { b.addEventListener('click', function () { runQuery(b.getAttribute('data-q')); }); });
+      document.getElementById('reset').addEventListener('click', reset);
+      document.getElementById('rerun').addEventListener('click', function () { seed(); kick(); });
+      plot.addEventListener('pointermove', kick, { passive: true });
+      var rz; addEventListener('resize', function () { clearTimeout(rz); rz = setTimeout(function () { if (isOpen) { measure(); kick(); } }, 120); });
+      /* web fonts change label widths: place labels again once they are in */
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { wasSettled = false; if (isOpen) { measure(); kick(); } });
+      vMap.addEventListener('click', function () { setView(false, true); });
+      vList.addEventListener('click', function () { setView(true, true); });
+    }
+
+    /* map / list switch (remembered per browser) */
+    function setView(asList, save) {
+      listView = !!asList;
+      fig.classList.toggle('as-list', listView);
+      vMap.setAttribute('aria-pressed', listView ? 'false' : 'true');
+      vList.setAttribute('aria-pressed', listView ? 'true' : 'false');
+      if (save) { store('sa5-mapview', listView ? 'list' : null); say(listView ? 'Showing the list' : 'Showing the map'); }
+      if (!listView && built) setTimeout(function () { measure(); kick(); }, 20);
+    }
+
+    function measure() {
+      /* client size, not the bounding box: the popup's opening scale must not shrink the viewBox */
+      if (!svg.clientWidth) return;
+      W = svg.clientWidth; H = svg.clientHeight; mobile = W < 760; var tiny = W < 560 || H < 380;
+      /* phones: labels only for highlighted points (selection, neighbours, query hits, zoomed cluster); tablets: every label, a size smaller */
+      svg.classList.toggle('compact-labels', mobile && !tiny);
+      N.forEach(function (n) { if (n.id === 'me') return; n.side0 = n.x > (tiny ? 0.3 : 0.6) ? 'l' : 'r'; placeLab(n, n.side0); });
+      wasSettled = false;
+      S.x = W * (mobile ? 0.40 : 0.43); S.y = H * (mobile ? 0.39 : 0.40);
+      svg.setAttribute('viewBox', '0 0 ' + Math.max(1, W) + ' ' + Math.max(1, H));
+      svg.classList.toggle('small-labels', tiny);
+      axX.setAttribute('x', W - 12); axX.setAttribute('y', H - 10);
+      axY.setAttribute('transform', 'translate(16 ' + (H - 14) + ') rotate(-90)');
+    }
+    function scr(wx, wy) { return [(wx - cam.x) * cam.k + W / 2, (wy - cam.y) * cam.k + H / 2]; }
+    function seed() {
+      N.forEach(function (n, i) { var a = (i * 2.399963) % (Math.PI * 2), rr = 0.35 + ((i * 37) % 11) / 11 * 0.75; n.sx = Math.cos(a) * rr; n.sy = Math.sin(a) * rr; n.ph = i * 1.7; });
+      t0 = null;
+    }
+    function ease(p) { return 1 - Math.pow(1 - p, 3); }
+    function frame(now) {
+      /* with reduced motion the layout is shown done, and turning motion back on later does not replay it */
+      if (t0 === null && visible) t0 = trainMs ? now : -1e9;
+      var p = !trainMs ? 1 : t0 === null ? 0 : Math.min(1, (now - t0) / trainMs), e = ease(p);
+      var k = reduce ? 1 : 0.11;
+      cam.x += (camT.x - cam.x) * k; cam.y += (camT.y - cam.y) * k; cam.k += (camT.k - cam.k) * k;
+      if (prevNow) dT += Math.min(50, Math.max(0, now - prevNow)); prevNow = now;
+      var drift = reduce ? 0 : 1, gap = 0;
+      N.forEach(function (n) {
+        var nx = n.sx + (n.x - n.sx) * e, ny = n.sy + (n.y - n.sy) * e;
+        gap += Math.sqrt((n.x - nx) * (n.x - nx) + (n.y - ny) * (n.y - ny));
+        var wx = nx * S.x + drift * Math.sin(dT * 0.0005 + n.ph) * 3.2, wy = ny * S.y + drift * Math.cos(dT * 0.00043 + n.ph) * 3.2;
+        n.wx = wx; n.wy = wy; var s = scr(wx, wy); n.px = s[0]; n.py = s[1];
+        n.g.setAttribute('transform', 'translate(' + s[0].toFixed(1) + ',' + s[1].toFixed(1) + ')');
+      });
+      /* honest readout: Δ is the real mean distance (in layout units) the points still have to travel */
+      var pre = mobile ? '' : 'layout · step ', d = (gap / N.length).toFixed(3);
+      var txt = p < 1 ? pre + '<b>' + Math.round(p * STEPS) + '</b>/' + STEPS + ' · Δ ' + d : pre + STEPS + '/' + STEPS + ' · Δ 0.000 <b class="ok">✓</b>';
+      if (hud.innerHTML !== txt) hud.innerHTML = txt;
+      E.forEach(function (ed) { var a = byId[ed[0]], b = byId[ed[1]]; ed.el.setAttribute('x1', a.px.toFixed(1)); ed.el.setAttribute('y1', a.py.toFixed(1)); ed.el.setAttribute('x2', b.px.toFixed(1)); ed.el.setAttribute('y2', b.py.toFixed(1)); });
+      Object.keys(CL).forEach(function (kk) { var c = CL[kk], s = scr(c.lx * S.x, c.ly * S.y); c.t.setAttribute('x', s[0].toFixed(1)); c.t.setAttribute('y', (cam.k < 1.05 ? Math.max(62, s[1]) : s[1]).toFixed(1)); });
+      if (state.q) {
+        var qx = 0, qy = 0, tot = 0; state.q.res.forEach(function (r) { qx += byId[r.id].wx * r.s; qy += byId[r.id].wy * r.s; tot += r.s; });
+        qx /= tot; qy /= tot; var qs = scr(qx, qy);
+        qmark.setAttribute('transform', 'translate(' + qs[0].toFixed(1) + ',' + qs[1].toFixed(1) + ')');
+        state.q.lines.forEach(function (L) { var n = byId[L.id]; L.el.setAttribute('x1', qs[0].toFixed(1)); L.el.setAttribute('y1', qs[1].toFixed(1)); L.el.setAttribute('x2', n.px.toFixed(1)); L.el.setAttribute('y2', n.py.toFixed(1)); });
+      }
+      return p >= 1 && Math.abs(camT.x - cam.x) < 0.05 && Math.abs(camT.y - cam.y) < 0.05 && Math.abs(camT.k - cam.k) < 0.001;
+    }
+    /* the loop pauses when the plot is off screen, the tab is hidden, motion is reduced, or the map has been idle for 8 s */
+    function loop(now) { var settled = frame(now); if (settled && !wasSettled) declutter(); wasSettled = settled; raf = (isOpen && visible && !document.hidden && !reduce && !(settled && now - lastAct > 8000)) ? requestAnimationFrame(loop) : null; if (!raf) prevNow = 0; }
+    function kick() { if (!built || !isOpen || !W) return; lastAct = performance.now(); if (reduce) { frame(lastAct); declutter(); wasSettled = true; return; } if (!raf) raf = requestAnimationFrame(loop); }
+    document.addEventListener('visibilitychange', function () { if (!document.hidden) kick(); });
+
+    /* labels: once the layout and camera settle, each visible label tries its default side, then the other side, below and above,
+       and takes the first spot that is on screen and clear of other labels, dots and cluster names. On phones a label with no room hides. */
+    function placeLab(n, side) {
+      var o = n.r + 7, L = n.lab;
+      if (side === 'r') { L.setAttribute('x', o); L.setAttribute('y', 4.5); L.setAttribute('text-anchor', 'start'); }
+      else if (side === 'l') { L.setAttribute('x', -o); L.setAttribute('y', 4.5); L.setAttribute('text-anchor', 'end'); }
+      else if (side === 'b') { L.setAttribute('x', 0); L.setAttribute('y', n.r + 15); L.setAttribute('text-anchor', 'middle'); }
+      else if (side === 't') { L.setAttribute('x', 0); L.setAttribute('y', -(n.r + 7)); L.setAttribute('text-anchor', 'middle'); }
+      else { /* diagonal: right or left, nudged up or down */
+        var r = side.charAt(0) === 'r', dy = side.charAt(1) === 'u' ? -12 : 12;
+        L.setAttribute('x', r ? o - 3 : -(o - 3)); L.setAttribute('y', 4.5 + dy); L.setAttribute('text-anchor', r ? 'start' : 'end');
+      }
+    }
+    function declutter() {
+      if (!built || !W || !plot.offsetParent || listView) return;
+      var tiny = svg.classList.contains('small-labels'), dim = svg.classList.contains('dim'), M = 3, kept = [];
+      function box(n) { var b = n.lab.getBBox(); return { x0: n.px + b.x - M, y0: n.py + b.y - M, x1: n.px + b.x + b.width + M, y1: n.py + b.y + b.height + M }; }
+      function hit(a, b) { return a.x0 < b.x1 && b.x0 < a.x1 && a.y0 < b.y1 && b.y0 < a.y1; }
+      /* when the map is dimmed, faded points do not block a label */
+      var dots = N.filter(function (n) { var c = n.g.classList; return !dim || c.contains('sel') || c.contains('hit-q') || c.contains('nb'); })
+        .map(function (n) { var r = n.id === 'me' ? 27 : n.r + 2; return { id: n.id, x0: n.px - r, y0: n.py - r, x1: n.px + r, y1: n.py + r }; });
+      Object.keys(CL).forEach(function (k) { var b = CL[k].t.getBBox(); if (b.width) kept.push({ x0: b.x - 2, y0: b.y - 2, x1: b.x + b.width + 2, y1: b.y + b.height + 2 }); });
+      if (byId.me && !tiny) kept.push(box(byId.me));
+      /* the step readout and the buttons sit over the plot: labels keep clear of them */
+      [hud, ctl].forEach(function (o) { if (o && o.offsetWidth) kept.push({ x0: o.offsetLeft - svg.offsetLeft - 4, y0: o.offsetTop - svg.offsetTop - 4, x1: o.offsetLeft - svg.offsetLeft + o.offsetWidth + 4, y1: o.offsetTop - svg.offsetTop + o.offsetHeight + 4 }); });
+      var qr = {}; if (state.q) state.q.res.forEach(function (r, i) { qr[r.id] = 20 - i; });
+      function rank(n) { var c = n.g.classList; return c.contains('sel') ? 100 : qr[n.id] ? qr[n.id] : c.contains('nb') ? 5 : 0; }
+      var list = N.filter(function (n) {
+        if (n.id === 'me') return false;
+        n.lab.classList.remove('lh'); placeLab(n, n.side0 || 'r');
+        var c = n.g.classList;
+        return tiny ? (c.contains('sel') || c.contains('hit-q') || c.contains('nb')) : (!dim || c.contains('sel') || c.contains('hit-q') || c.contains('nb'));
+      });
+      list.sort(function (a, b) { return rank(b) - rank(a) || b.r - a.r; });
+      list.forEach(function (n) {
+        var d = n.side0 || 'r', o2 = d === 'l' ? 'r' : 'l', sides = [d, o2, 'b', 't', d + 'u', d + 'd', o2 + 'u', o2 + 'd'];
+        for (var i = 0; i < sides.length; i++) {
+          placeLab(n, sides[i]); var b = box(n);
+          if (b.x0 < 0 || b.x1 > W || b.y0 < 0 || b.y1 > H) continue;
+          if (kept.some(function (k) { return hit(b, k); })) continue;
+          if (dots.some(function (o) { return o.id !== n.id && hit(b, o); })) continue;
+          kept.push(b); return;
+        }
+        /* no free spot: a highlighted label stays; any other label hides until its point is hovered or focused */
+        placeLab(n, d);
+        if (!tiny && rank(n) > 0) kept.push(box(n)); else n.lab.classList.add('lh');
+      });
+    }
+    /* stacked layout (the panel sits under the plot): bring the panel's top into view, keeping most of the plot on screen */
+    var scroller = document.getElementById('mapBody');
+    function revealPanel() {
+      if (!stacked() || listView) return;
+      var r = panel.getBoundingClientRect();
+      if (r.top > innerHeight - 160) scroller.scrollBy({ top: r.top - innerHeight * 0.55, behavior: reduce ? 'auto' : 'smooth' });
+    }
+
+    /* keyboard: the map is one tab stop; arrow keys move to the nearest point in that direction, Home goes back to me */
+    function setRove(id) { if (rove === id) return; if (byId[rove]) byId[rove].g.setAttribute('tabindex', '-1'); rove = id; byId[id].g.setAttribute('tabindex', '0'); }
+    function focusNode(id) {
+      var n = byId[id]; setRove(id); n.g.focus({ preventScroll: true });
+      if (n.px < 24 || n.px > W - 24 || n.py < 24 || n.py > H - 24) { camT.x = n.wx; camT.y = n.wy; kick(); }
+    }
+    function step(n, key) {
+      if (key === 'Home') return 'me';
+      var dir = { ArrowRight: [1, 0], ArrowLeft: [-1, 0], ArrowDown: [0, 1], ArrowUp: [0, -1] }[key]; if (!dir) return null;
+      var best = null, bs = Infinity;
+      N.forEach(function (m) {
+        if (m === n) return;
+        var dx = m.px - n.px, dy = m.py - n.py, along = dx * dir[0] + dy * dir[1], across = Math.abs(dx * dir[1] - dy * dir[0]);
+        if (along <= 2) return;
+        var sc = along + across * 2.2; if (sc < bs) { bs = sc; best = m.id; }
+      });
+      return best;
+    }
+
+    function clearMarks() {
+      wasSettled = false;
+      N.forEach(function (n) { n.g.classList.remove('sel', 'nb', 'hit-q'); });
+      E.forEach(function (ed) { ed.el.classList.remove('on'); });
+      Object.keys(CL).forEach(function (k) { CL[k].el.classList.remove('on'); });
+      while (gQ.firstChild) gQ.removeChild(gQ.firstChild);
+      qmark.style.display = 'none'; state.q = null;
+      svg.classList.remove('dim'); svg.style.removeProperty('--sel');
+    }
+    /* hovering or focusing a point lights its lines in its cluster colour */
+    function hoverEdges(id, on) {
+      if (state.sel || state.q || state.c) return;
+      if (on) svg.style.setProperty('--sel', 'var(--k-' + byId[id].c + ')'); else svg.style.removeProperty('--sel');
+      E.forEach(function (ed) { if (ed[0] === id || ed[1] === id) ed.el.classList.toggle('on', on); });
+    }
+    function fitTo(ids, maxK) {
+      if (!W) return;
+      var xs = ids.map(function (i) { return byId[i].x * S.x; }), ys = ids.map(function (i) { return byId[i].y * S.y; });
+      var x0 = Math.min.apply(0, xs), x1 = Math.max.apply(0, xs), y0 = Math.min.apply(0, ys), y1 = Math.max.apply(0, ys);
+      var bw = Math.max(80, x1 - x0) + 220, bh = Math.max(60, y1 - y0) + 120;
+      camT.k = Math.max(1, Math.min(maxK || 1.8, W / bw, H / bh));
+      camT.x = (x0 + x1) / 2 + (mobile ? 0 : 40 / camT.k); camT.y = (y0 + y1) / 2;
+      kick();
+    }
+    function stacked() { return window.matchMedia ? window.matchMedia('(max-width: 900px)').matches : mobile; }
+    var coarse = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+    function xBtn(what) { return '<button type="button" class="x" aria-label="' + what + '">' + (coarse ? '✕ close' : 'esc ✕') + '</button>'; }
+    function tint(c) { panel.style.setProperty('--c', c ? 'var(--k-' + c + ')' : 'var(--q)'); panel.style.setProperty('--ct', c ? 'var(--kt-' + c + ')' : 'var(--q-ink)'); }
+    function itemBtn(id, extra) { var n = byId[id]; return '<li><button type="button" class="c-' + n.c + '" data-go="' + id + '"><i></i><span>' + esc(n.label) + '</span>' + (extra || '<span></span>') + '</button></li>'; }
+    function wirePanel() {
+      [].forEach.call(panel.querySelectorAll('[data-go]'), function (b) { b.addEventListener('click', function () { select(b.getAttribute('data-go'), true); }); });
+      var x = panel.querySelector('.x'); if (x) x.addEventListener('click', reset);
+      [].forEach.call(panel.querySelectorAll('[data-q]'), function (b) { b.addEventListener('click', function (ev) { ev.preventDefault(); runQuery(b.getAttribute('data-q')); }); });
+    }
+    function render(html, msg, guideState) {
+      var hadFocus = panel.contains(document.activeElement);
+      state.guide = !!guideState;
+      panel.innerHTML = html; wirePanel();
+      var h = panel.querySelector('h3'); if (h) h.setAttribute('tabindex', '-1');
+      if (listView && !guideState) {
+        /* in the list view the panel can sit below the list: bring it to the reader */
+        var r = panel.getBoundingClientRect();
+        if (r.top < 60 || r.top > innerHeight - 140) panel.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+      }
+      if (h && (hadFocus || (listView && !guideState))) h.focus({ preventScroll: true });
+      if (msg) say(msg);
+    }
+    function guide() {
+      panel.style.removeProperty('--c'); panel.style.removeProperty('--ct');
+      render('<span class="pk"><i></i>How to read the map</span><h3>Every point is a piece of my career.</h3><p>Colour shows the cluster. Lines join related items. Click a point to open it, click a cluster name to zoom in, or query the space above. Switch to <b>list</b> for a plain list.</p>' +
+        '<p class="keys"><kbd>Tab</kbd> into the map · <kbd>←</kbd><kbd>↑</kbd><kbd>↓</kbd><kbd>→</kbd> move · <kbd>Enter</kbd> open · <kbd>Home</kbd> me · <kbd>Esc</kbd> close</p><h4>Start with</h4><ol>' +
+        itemBtn('me') + itemBtn('thesis') + itemBtn('hate') + itemBtn('researcher') + itemBtn('guitar') + '</ol>', null, true);
+    }
+    function select(id, moveCam) {
+      var n = byId[id]; if (!n) return;
+      clearMarks(); state.sel = id; state.c = null;
+      svg.classList.add('dim'); svg.style.setProperty('--sel', 'var(--k-' + n.c + ')'); n.g.classList.add('sel');
+      n.nb.forEach(function (b) { byId[b].g.classList.add('nb'); });
+      E.forEach(function (ed) { if (ed[0] === id || ed[1] === id) ed.el.classList.add('on'); });
+      var links = (n.links || []).map(function (l) { var ext = /^https?:/.test(l[1]); return '<a href="' + esc(l[1]) + '"' + (ext ? ' target="_blank" rel="noopener"' : '') + '>' + esc(l[0]) + (ext ? ' ↗' : ' →') + '</a>'; }).join('');
+      tint(n.c);
+      render(xBtn('Close this point') + '<span class="pk"><i></i>' + esc(CL[n.c].name) + '</span><h3>' + esc(n.title) + '</h3>' +
+        (n.meta ? '<p class="meta2">' + esc(n.meta) + '</p>' : '') + (n.body ? '<p>' + esc(n.body) + '</p>' : '') + (links ? '<div class="plinks">' + links + '</div>' : '') +
+        (n.nb.length ? '<h4>Nearest neighbours</h4><ol>' + n.nb.map(function (b) { return itemBtn(b); }).join('') + '</ol>' : ''),
+        n.title + ', ' + n.nb.length + (n.nb.length === 1 ? ' neighbour' : ' neighbours'));
+      setRove(id);
+      if (moveCam) { fitTo([id].concat(n.nb), 1.7); revealPanel(); }
+    }
+    function selectCluster(k) {
+      clearMarks(); state.sel = null; state.c = k;
+      svg.classList.add('dim'); svg.style.setProperty('--sel', 'var(--k-' + k + ')'); CL[k].el.classList.add('on');
+      var ids = N.filter(function (n) { return n.c === k; }).map(function (n) { return n.id; });
+      ids.forEach(function (i) { byId[i].g.classList.add('nb'); });
+      E.forEach(function (ed) { if (byId[ed[0]].c === k && byId[ed[1]].c === k) ed.el.classList.add('on'); });
+      tint(k);
+      render(xBtn('Close this cluster') + '<span class="pk"><i></i>Cluster</span><h3>' + esc(CL[k].name) + '</h3><p class="meta2">' + ids.length + ' points</p><ol>' + ids.map(function (i) { return itemBtn(i); }).join('') + '</ol>',
+        CL[k].name + ', ' + ids.length + ' points');
+      fitTo(ids, 2.0); revealPanel();
+    }
+    function tokens(s) { return String(s).toLowerCase().replace(/[^a-z0-9ぁ-んァ-ン一-龥ąćęłńóśźż+.\- ]/g, ' ').split(/\s+/).filter(function (w) { return w.length > 1 && ['and', 'the', 'my', 'of', 'in', 'on', 'for', 'to', 'a', 'your', 'you', 'what', 'is'].indexOf(w) < 0; }); }
+    var TRY = '<div class="plinks"><a href="#" data-q="memes">memes</a><a href="#" data-q="Japan">Japan</a><a href="#" data-q="guitar">guitar</a><a href="#" data-q="papers">papers</a></div>';
+    function runQuery(q) {
+      document.getElementById('q').value = q;
+      var qt = tokens(q);
+      if (!qt.length) {
+        if (!String(q).trim()) return;
+        clearMarks(); state.sel = null; state.c = null;
+        tint(null);
+        render(xBtn('Clear the query') + '<span class="pk"><i></i>Query</span><h3>Try a more specific word.</h3><p>“' + esc(q) + '” is too general to rank the space by. Try one of these:</p>' + TRY,
+          'Query too general, try a more specific word');
+        camT.x = 0; camT.y = 0; camT.k = 1; kick(); revealPanel(); return;
+      }
+      var res = N.map(function (n) {
+        var s = 0, tags = n.tags.map(function (t) { return t.toLowerCase(); }), text = (n.label + ' ' + n.title + ' ' + (n.meta || '') + ' ' + (n.body || '')).toLowerCase();
+        qt.forEach(function (w) {
+          var stem = w.length > 4 ? w.replace(/(ies|es|s)$/, '') : w;
+          if (tags.some(function (t) { return t === w || t === stem; })) s += 3;
+          else if (stem.length > 2 && tags.some(function (t) { return t.indexOf(stem) === 0 || stem.indexOf(t) === 0 && t.length > 3; })) s += 2;
+          else if (stem.length > 2 && text.indexOf(stem) >= 0) s += 1;
+          else if (stem.length <= 2 && new RegExp('(^|[^a-z0-9])' + stem.replace(/[.+\-]/g, '\\$&') + '($|[^a-z0-9])').test(text)) s += 1;
+        });
+        return { id: n.id, s: s };
+      }).filter(function (r) { return r.s > 0; }).sort(function (a, b) { return b.s - a.s; }).slice(0, 7);
+      clearMarks(); state.sel = null; state.c = null;
+      if (!res.length) {
+        tint(null);
+        render(xBtn('Clear the query') + '<span class="pk"><i></i>Query</span><h3>No neighbours for “' + esc(q) + '”.</h3><p>Nothing in the space matches those words. Try one of these:</p>' + TRY,
+          'No neighbours for ' + q);
+        camT.x = 0; camT.y = 0; camT.k = 1; kick(); revealPanel(); return;
+      }
+      var max = res[0].s; res.forEach(function (r) { r.s = r.s / max; });
+      state.q = { res: res, lines: res.map(function (r) { var L = el('line', { 'class': 'ql', 'stroke-width': (1.6 + r.s * 2.4).toFixed(2), 'stroke-opacity': (0.45 + r.s * 0.55).toFixed(2) }, gQ); return { id: r.id, el: L }; }) };
+      qmark.style.display = ''; svg.classList.add('dim');
+      res.forEach(function (r) { byId[r.id].g.classList.add('hit-q'); });
+      tint(null);
+      render(xBtn('Clear the query') + '<span class="pk"><i></i>Query · top ' + res.length + '</span><h3>“' + esc(q) + '”</h3><p class="meta2">Nearest neighbours by keyword similarity</p><ol>' +
+        res.map(function (r) { return itemBtn(r.id, '<span class="sim"><s style="--w:' + Math.round(r.s * 100) + '%"></s>' + r.s.toFixed(2) + '</span>'); }).join('') + '</ol>',
+        'Query ' + q + ': ' + res.length + ' results');
+      fitTo(res.map(function (r) { return r.id; }), 1.8); revealPanel();
+    }
+    function reset() { document.getElementById('q').value = ''; clearMarks(); state.sel = null; state.c = null; camT.x = 0; camT.y = 0; camT.k = 1; guide(); kick(); }
+
+    api.open = function () {
+      var first = !built; if (first) build();
+      isOpen = true;
+      if (first) setView(load('sa5-mapview') === 'list', false);
+      measure();
+      if (first) { seed(); guide(); }
+      kick();
+      if (api.pending) { var id = api.pending; api.pending = null; setTimeout(function () { select(id, true); }, first && !reduce ? 1400 : 60); }
+    };
+    api.close = function () { isOpen = false; if (raf) { cancelAnimationFrame(raf); raf = null; } prevNow = 0; };
+    /* Escape: true when it closed an open point, query or cluster (the popup then stays open) */
+    api.esc = function () { if (!built || state.guide) return false; reset(); return true; };
+    /* typed but not yet submitted query text */
+    api.hasQueryRun = function () { return !!state.q || !state.guide; };
+    api.motion = function () { trainMs = reduce ? 0 : 2600; if (reduce && raf) { cancelAnimationFrame(raf); raf = null; prevNow = 0; } kick(); };
+    api.has = function (id) { return !!byId[id]; };
+    api.select = function (id) { select(id, true); };
+    return api;
+  })();
+
+  if (mqR) { var onR = function () { reduce = mqR.matches; MAP.motion(); }; if (mqR.addEventListener) mqR.addEventListener('change', onR); else if (mqR.addListener) mqR.addListener(onR); }
+  /* narrow phones: a placeholder short enough to read in full */
+  var qIn = document.getElementById('q');
+  if (window.matchMedia && window.matchMedia('(max-width: 340px)').matches) qIn.setAttribute('placeholder', 'e.g. Japan');
+  else if (window.matchMedia && window.matchMedia('(max-width: 480px)').matches) qIn.setAttribute('placeholder', 'e.g. memes, Japan');
+
+  /* ---------- the popup: opened from the Layer_01 button (or #map), closed by its button, Escape or a tap outside ---------- */
+  var dlg = document.getElementById('mapDlg'), root = document.documentElement, opener = document.getElementById('mapOpen');
+  var modal = typeof dlg.showModal === 'function';
+  /* opened by the #map address (a link or Back/Forward): closing steps back in history so the address and the page agree */
+  var byHash = false, firstHash = location.hash === '#map';
+  function openMap(fromAddr) {
+    if (dlg.open) return;
+    byHash = !!fromAddr;
+    if (modal) dlg.showModal(); else dlg.setAttribute('open', '');
+    root.classList.add('dlg-open');
+    MAP.open();
+  }
+  function closeMap() {
+    if (!dlg.open) return;
+    onClosed();
+    if (modal) dlg.close(); else dlg.removeAttribute('open');
+  }
+  function onClosed() {
+    if (!root.classList.contains('dlg-open')) return;
+    root.classList.remove('dlg-open'); MAP.close();
+    if (location.hash === '#map') {
+      if (byHash && !firstHash) { byHash = false; history.back(); }
+      else if (history.replaceState) try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {}
+    }
+    byHash = false; firstHash = false;
+    /* the hero animation waits for this */
+    try { window.dispatchEvent(new Event('mapclosed')); } catch (e) {}
+  }
+  dlg.addEventListener('close', onClosed);
+  if (opener) opener.addEventListener('click', function () { openMap(false); });
+  document.getElementById('mapClose').addEventListener('click', closeMap);
+  var escAt = -1e9;
+  dlg.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    e.preventDefault(); e.stopPropagation(); escAt = performance.now();
+    /* Escape in the query box first clears text that was typed but not run */
+    if (e.target === qIn && qIn.value && !MAP.hasQueryRun()) { qIn.value = ''; return; }
+    if (!MAP.esc()) closeMap();
+  });
+  /* a cancel that is not that keydown (e.g. the Android back gesture) closes an open point first, then the popup */
+  dlg.addEventListener('cancel', function (e) {
+    if (performance.now() - escAt < 200 || MAP.esc()) e.preventDefault();
+  });
+  /* a tap on the dimmed backdrop (outside the sheet) closes; a drag that only ends there (e.g. selecting text) does not */
+  var downOnDlg = false;
+  dlg.addEventListener('pointerdown', function (e) { downOnDlg = e.target === dlg; });
+  dlg.addEventListener('click', function (e) {
+    if (e.target === dlg) { if (downOnDlg) closeMap(); downOnDlg = false; return; }
+    downOnDlg = false;
+    /* links to a part of the CV close the popup first, then the page jumps there */
+    var a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (a && a.getAttribute('href').length > 1 && !a.hasAttribute('data-q')) { byHash = false; firstHash = true; closeMap(); }
+  });
+  function fromHash() { if (location.hash === '#map') openMap(true); else if (dlg.open && byHash) { byHash = false; closeMap(); } }
+  addEventListener('hashchange', fromHash);
+  fromHash();
+})();
+
+</script>
+</body>
+</html>
