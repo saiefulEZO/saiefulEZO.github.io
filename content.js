@@ -64,7 +64,7 @@ window.SITE = {
     title: "Researcher",                              // your job title, above your name (also update the About text and facts, and the job list)
     workplace: "Kitami Institute of Technology",
     location: "Hokkaido, Japan",
-    status: "Open to research roles",                 // the green badge; "" hides it
+    status: "",                 // the green badge; "" hides it
 
     intro: "I'm an AI researcher working on how machines understand language and images, and how that understanding can help make online spaces safer.",
     introHighlight: "language and images",            // words from the intro to highlight; "" for none
